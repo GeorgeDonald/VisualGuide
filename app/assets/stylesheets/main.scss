@@ -1,0 +1,16 @@
+// Place all the styles related to the main controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.map{
+  width: 800px;
+  height: 400px;
+  img{
+    background-size: 100% 100%;
+  }
+}
+
+#guidmap {
+  width: 800px;
+  height: 400px;
+}
