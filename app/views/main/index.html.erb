@@ -1,3 +1,6 @@
+<% if current_user %>
+<%= image_tag current_user.avatar.url(:thumb) %>
+<% end %>
 
 <div class="map">
 <img alt="street view" id='map_image'>
