@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171219223237) do
+ActiveRecord::Schema.define(version: 20171219225508) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20171219223237) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string "full_name"
+    t.string "google_api_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
