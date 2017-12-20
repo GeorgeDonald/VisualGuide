@@ -4,7 +4,11 @@
     <title>VisualGuide</title>
     <%= csrf_meta_tags %>
 
+    <% if user_signed_in? %>
+    <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=#{current_user.google_api_id}" %>
+    <% else %>
     <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?v=3&libraries=places" %>
+    <% end %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -12,6 +16,7 @@
   <body>
     <header>
       <% if user_signed_in? %>
+      <input type="hidden" name="google_api_key" id="google_api_key" value="<%=current_user.google_api_id%>">
       <%= link_to "Home", root_path %>
       <%= link_to "Edit", edit_user_registration_path %>
       <%= link_to "Log Out", destroy_user_session_path, method: :delete %>

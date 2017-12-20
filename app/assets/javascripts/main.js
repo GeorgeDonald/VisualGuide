@@ -6,7 +6,11 @@ window.onload = ()=>{
   const RoE = 6371e3;
 
   function makeUrl(prms){
-    return `${url}&location=${prms.latitude},${prms.longitude}&heading=${prms.heading}&pitch=${prms.pitch}`;
+    var key = '';
+    var eleGak = document.getElementById("google_api_key");
+    if(eleGak && eleGak.value)
+      key = `key=${eleGak.value}`;
+    return `${url}&location=${prms.latitude},${prms.longitude}&heading=${prms.heading}&pitch=${prms.pitch}${key}`;
   }
 
   function getLocation() {
