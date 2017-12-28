@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171219225508) do
+ActiveRecord::Schema.define(version: 20171228175521) do
+
+  create_table "travels", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "from_name"
+    t.float "from_lagitude"
+    t.float "from_longitude"
+    t.string "to_name"
+    t.float "to_lagitude"
+    t.float "to_longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

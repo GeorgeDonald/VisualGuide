@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  name: MyString
+  from_name: MyString
+  from_lagitude: 1.5
+  from_longitude: 1.5
+  to_name: MyString
+  to_lagitude: 1.5
+  to_longitude: 1.5
+
+two:
+  user_id: 1
+  name: MyString
+  from_name: MyString
+  from_lagitude: 1.5
+  from_longitude: 1.5
+  to_name: MyString
+  to_lagitude: 1.5
+  to_longitude: 1.5

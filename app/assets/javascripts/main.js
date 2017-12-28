@@ -1,8 +1,7 @@
-window.onload = function(){
-  document.tourMainExecuted=true;
-  var url = "https://maps.googleapis.com/maps/api/streetview?size=800x400&fov=120";
+function mainOnload(){
+  var url = "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120";
   var defaultPrms={latitude:39.95259199321605,longitude: -75.16522200000003,heading: 0.0, pitch: 0.0};
-  var map;
+  var map = null;
   var marker = null;
   const RoE = 6371e3;
 
@@ -113,8 +112,31 @@ window.onload = function(){
   });
 }
 
-window.addEventListener('mouseover',(e)=>{
-  var eleMap = document.getElementById('guidmap')
-  if(eleMap && !eleMap.childElementCount)
-    window.onload();
-});
+function setReloadMap(){
+  window.addEventListener('mouseover',(e)=>{
+    var eleMap = document.getElementById('guidmap')
+    if(eleMap && !eleMap.childElementCount)
+      window.onload();
+  });
+}
+
+function setToggleMainMenu(){
+  function toggleMainMenu(){
+    var cl = document.querySelector("#mainmenu").classList;
+    var atcl = document.querySelector("article");
+    var cur = window.getComputedStyle(atcl)['marginTop'];
+    cur = `calc(${cur} ${cl.contains("hidden") ? "+" : "-"} 30px)`;
+    atcl.style.marginTop=cur;
+    cl.toggle("hidden");
+  }
+
+  window.addEventListener('click',(e)=>{
+    if(e.target!==document.querySelector("#user_avatar")){
+      var cl = document.querySelector("#mainmenu").classList;
+      if(!cl.contains("hidden"))
+        toggleMainMenu();
+    }
+  });
+
+  document.querySelector("#user_avatar").addEventListener('click',toggleMainMenu);
+}

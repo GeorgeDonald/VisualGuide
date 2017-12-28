@@ -16,19 +16,28 @@
 
   <body>
     <header>
-      <% t = Time.now %>
-      <input type="hidden" name="update_<%=t.to_i%>" value="<%=t.to_i%>">
-      <% if user_signed_in? %>
-      <input type="hidden" name="google_api_key" id="google_api_key" value="<%=current_user.google_api_id%>">
-      <%= link_to "Home", root_path %>
-      <%= link_to "Edit", edit_user_registration_path %>
-      <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-      <% end %>
-
+      <div class="header">
+        <% if user_signed_in? %>
+        <input type="hidden" name="google_api_key" id="google_api_key" value="<%=current_user.google_api_id%>">
+        <%= image_tag current_user.avatar.url(:thumb), id: "user_avatar" %>
+        <% end %>
+      </div>
+      <div class="hidden mainmenu" id='mainmenu'>
+        <%= link_to "Roam", root_path %>
+        <%= link_to "Travel", travels_path %>
+        <%= link_to "Guide", root_path %>
+        <%= link_to "Follow", root_path %>
+        <%= link_to "Record", root_path %>
+        <%= link_to "Playback", root_path %>
+        <%= link_to "Edit Profile", edit_user_registration_path %>
+        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+      </div>
     </header>
+
     <article class="">
       <%= yield %>
     </article>
+
     <footer>
     </footer>
   </body>

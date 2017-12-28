@@ -1,18 +1,16 @@
-<% if current_user %>
-<%= image_tag current_user.avatar.url(:thumb) %>
-<% end %>
-
-<%= link_to "Select Route", "/routestart" %>
-
-<div class="map">
-<img alt="street view" id='map_image'>
-</div>
-<br>
+<div class="map center">
+<img alt="street view" id='map_image' />
 <div id="lat_lon">
-  <div id="lat"></div>
-  <div id="lon"></div>
-  <div id="heading"></div>
-  <div id="pitch"></div>
+  <div class="strike" id="lat"></div>
+  <div class="strike" id="lon"></div>
+  <div class="strike" id="heading"></div>
+  <div class="strike" id="pitch"></div>
+</div>
 </div>
 
-<div id="guidmap"></div>
+<div class="center" id="guidmap"></div>
+<script type="text/javascript">
+window.onload=mainOnload();
+setReloadMap();
+setToggleMainMenu();
+</script>
