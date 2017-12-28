@@ -2,12 +2,14 @@
 <%= image_tag current_user.avatar.url(:thumb) %>
 <% end %>
 
+<%= link_to "Select Route", "/routestart" %>
+
 <div class="map">
 <img alt="street view" id='map_image'>
 </div>
 <br>
 <div id="lat_lon">
-  <div id="lat"></div><br>
+  <div id="lat"></div>
   <div id="lon"></div>
   <div id="heading"></div>
   <div id="pitch"></div>

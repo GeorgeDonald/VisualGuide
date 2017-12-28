@@ -1,4 +1,5 @@
-window.onload = ()=>{
+window.onload = function(){
+  document.tourMainExecuted=true;
   var url = "https://maps.googleapis.com/maps/api/streetview?size=800x400&fov=120";
   var defaultPrms={latitude:39.95259199321605,longitude: -75.16522200000003,heading: 0.0, pitch: 0.0};
   var map;
@@ -111,3 +112,9 @@ window.onload = ()=>{
     }
   });
 }
+
+window.addEventListener('mouseover',(e)=>{
+  var eleMap = document.getElementById('guidmap')
+  if(eleMap && !eleMap.childElementCount)
+    window.onload();
+});
