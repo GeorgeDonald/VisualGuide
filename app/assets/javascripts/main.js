@@ -9,7 +9,7 @@ function mainOnload(){
     var key = '';
     var eleGak = document.getElementById("google_api_key");
     if(eleGak && eleGak.value)
-      key = `key=${eleGak.value}`;
+      key = `&key=${eleGak.value}`;
     return `${url}&location=${prms.latitude},${prms.longitude}&heading=${prms.heading}&pitch=${prms.pitch}${key}`;
   }
 
@@ -40,6 +40,9 @@ function mainOnload(){
     document.querySelector("#lat").innerText=`Latitude: ${defaultPrms.latitude}`;
     document.querySelector("#lon").innerText=`Longitude: ${defaultPrms.longitude}`;
     document.querySelector("#heading").innerText=`Heading: ${defaultPrms.heading}`;
+
+    document.querySelector("#compass").style.transform = `rotate(${defaultPrms.heading}deg)`
+
     document.querySelector("#pitch").innerText=`Ptch: ${defaultPrms.pitch}`;
     var center = {lat: defaultPrms.latitude, lng: defaultPrms.longitude};
     map.setCenter(center);
@@ -48,13 +51,9 @@ function mainOnload(){
     marker = new google.maps.Marker({position: center,map: map});
   }
 
-  initMap();
-  locateMap();
-  getLocation();
-
-  window.addEventListener('keydown', (e)=>{
+  function onKeyDown(key){
     var care = true;
-    switch(e.key){
+    switch(key){
       case "ArrowLeft":  //left arrow
         defaultPrms.heading-=1.0;
         if(defaultPrms.heading<0.0)
@@ -105,11 +104,61 @@ function mainOnload(){
         care = false;
         break;
     }
-    if(care){
-      e.preventDefault();
+    if(care)
       locateMap();
-    }
+    return care;
+  }
+
+  window.addEventListener('keydown', (e)=>{
+    var care = onKeyDown(e.key);
+    if(care)
+      e.preventDefault();
   });
+
+  function resizeElement(eleid, cxs, cx, cys, cy){
+      var ele = document.querySelector(eleid);
+      if(!ele)return;
+      var styl = window.getComputedStyle(ele);
+      ele.style.width = `calc(${styl["width"]} ${cxs} ${cx})`;
+      ele.style.height = `calc(${styl["height"]} ${cys} ${cy})`;
+  }
+
+  function respMapCtrlItem(){
+    var items = [{id: "#map_ctrl_turnleft", key: "ArrowLeft"},
+      {id:"#map_ctrl_forward", key: "ArrowUp"},
+      {id:"#map_ctrl_turnright", key: "ArrowRight"},
+      {id:"#map_ctrl_moveleft", key: ","},
+      {id:"#map_ctrl_moveright", key: "."},
+      {id:"#map_ctrl_enlarge", func: ()=>{resizeElement("#streetview","+","20px","+", "20px");}},
+      {id:"#map_ctrl_backward", key: "ArrowDown"},
+      {id:"#map_ctrl_shrink", func: ()=>{resizeElement("#streetview","-","20px","-", "20px");}}
+    ];
+    items.forEach((e)=>{
+      var timerID = undefined;
+      var ele = document.querySelector(e.id);
+      if(ele){
+        if(e.key){
+          ele.addEventListener('mousedown',()=>{
+            onKeyDown(e.key);
+            timerID=setInterval(()=>onKeyDown(e.key),100);
+          });
+          window.addEventListener('mouseup',()=>{
+            if(timerID!=undefined){
+              clearInterval(timerID);
+              timerID = undefined;
+            }
+          });
+        }
+        else if(e.func)
+          ele.addEventListener('click',()=>e.func());
+      }
+    });
+  }
+
+  respMapCtrlItem();
+  initMap();
+  locateMap();
+  getLocation();
 }
 
 function setReloadMap(){
@@ -123,10 +172,16 @@ function setReloadMap(){
 function setToggleMainMenu(){
   function toggleMainMenu(){
     var cl = document.querySelector("#mainmenu").classList;
-    var atcl = document.querySelector("article");
-    var cur = window.getComputedStyle(atcl)['marginTop'];
+    var elem = document.querySelector("article");
+    var cur = window.getComputedStyle(elem)['marginTop'];
     cur = `calc(${cur} ${cl.contains("hidden") ? "+" : "-"} 30px)`;
-    atcl.style.marginTop=cur;
+    elem.style.marginTop=cur;
+
+    elem = document.querySelector("header");
+    cur = window.getComputedStyle(elem)['height'];
+    cur = `calc(${cur} ${cl.contains("hidden") ? "+" : "-"} 30px)`;
+    elem.style.height=cur;
+
     cl.toggle("hidden");
   }
 

@@ -5,6 +5,7 @@
 $headerHeight: 80px;
 
 header {
+  overflow: hidden;
   position: fixed;
   left: 0;
   top: 0;
@@ -16,6 +17,30 @@ header {
     height: $headerHeight;
     width: auto;
     cursor: pointer;
+  }
+
+  #mainmenu {
+    position: relative;
+    left: 100px;
+    a {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      width: 120px;
+      height: 30px;
+      text-align: center;
+      background-color: rgb(30, 30, 130);
+      line-height: 30px;
+      border-radius: 10px;
+      &:hover {
+        background-color: rgb(30, 30, 200);
+      }
+      &:active{
+        background-color: rgb(30, 30, 160);
+      }
+    }
   }
 }
 
@@ -40,6 +65,58 @@ article {
     position: absolute;
     left: 0;
     top: 0;
+  }
+
+  #map_ctrl{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    .map_ctrl_item{
+      width: 16px;
+      height: 16px;
+      background-color: rgba(160, 160, 160, 0.5);
+      color: white;
+      text-align: center;
+      line-height: 16px;
+      cursor: pointer;
+      &:hover{
+        background-color: rgb(160, 160, 230);
+      }
+      &:active{
+        background-color: rgb(160, 160, 190);
+      }
+    }
+  }
+  #compass{
+    position: absolute;
+    top: 48px;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(160, 160, 160, 0.5);
+    border-radius: 100%;
+    #uparrow {
+      position: relative;
+      left: 18px;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+    	border-right: 6px solid transparent;
+    	border-bottom: 24px solid red;
+    }
+    #downarrow {
+      position: relative;
+      left: 18px;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+    	border-right: 6px solid transparent;
+    	border-top: 24px solid white;
+    }
   }
 }
 
