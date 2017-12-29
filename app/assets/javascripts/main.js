@@ -116,11 +116,19 @@ function mainOnload(){
   });
 
   function resizeElement(eleid, cxs, cx, cys, cy){
+      if((cxs!=='+'&&cxs!=='-')||(cys!=='+'&&cys!=='-'))
+        return;
+
       var ele = document.querySelector(eleid);
       if(!ele)return;
       var styl = window.getComputedStyle(ele);
-      ele.style.width = `calc(${styl["width"]} ${cxs} ${cx})`;
-      ele.style.height = `calc(${styl["height"]} ${cys} ${cy})`;
+      var width = parseInt(styl["width"]);
+      var height = parseInt(styl["height"]);
+      if(((cxs === "+" && width < 4096) || (cxs === '-' && width > 120)) &&
+        ((cys === "+" && height < 3072) || (cys === '-' && height > 90))){
+        ele.style.width = `calc(${styl["width"]} ${cxs} ${cx})`;
+        ele.style.height = `calc(${styl["height"]} ${cys} ${cy})`;
+      }
   }
 
   function respMapCtrlItem(){
@@ -129,9 +137,9 @@ function mainOnload(){
       {id:"#map_ctrl_turnright", key: "ArrowRight"},
       {id:"#map_ctrl_moveleft", key: ","},
       {id:"#map_ctrl_moveright", key: "."},
-      {id:"#map_ctrl_enlarge", func: ()=>{resizeElement("#streetview","+","20px","+", "20px");}},
+      {id:"#map_ctrl_enlarge", func: ()=>{resizeElement("#streetview","+","40px","+", "30px");}},
       {id:"#map_ctrl_backward", key: "ArrowDown"},
-      {id:"#map_ctrl_shrink", func: ()=>{resizeElement("#streetview","-","20px","-", "20px");}}
+      {id:"#map_ctrl_shrink", func: ()=>{resizeElement("#streetview","-","40px","-", "30px");}}
     ];
     items.forEach((e)=>{
       var timerID = undefined;
