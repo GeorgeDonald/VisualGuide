@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'main#index'
 
-  resources :travels, only: [:index,:new,:edit]
+  resources :travels, only: [:index,:new,:edit,:show,:destroy]
   devise_for :users, controllers: {
         registrations: 'users/registrations'
       }

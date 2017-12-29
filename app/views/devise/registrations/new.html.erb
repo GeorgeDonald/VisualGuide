@@ -1,5 +1,9 @@
-<h2>Sign up</h2>
+<div class="user_pannel user_signup">
+  <div class="left_part">
+    <img src="/images/profile-icon.png" alt="">
+  </div>
 
+  <div class="right_part">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
@@ -30,7 +34,7 @@
 
   <div class="field">
     <%= f.label "Google API Key: " %><br />
-    <%= f.text_field :google_api_id %>
+    <%= f.text_field :google_api_key %>
   </div>
 
   <div class="actions">
@@ -39,3 +43,7 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+  </div>
+
+</div>

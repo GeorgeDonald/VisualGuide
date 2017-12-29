@@ -1,5 +1,9 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="user_pannel user_update">
+  <div class="left_part">
+    <img src="/images/profile-icon.png" alt="">
+  </div>
 
+  <div class="right_part">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -40,7 +44,7 @@
 
   <div class="field">
     <%= f.label "Google API Key: " %><br />
-    <%= f.text_field :google_api_id %>
+    <%= f.text_field :google_api_key %>
   </div>
 
   <div class="actions">
@@ -48,8 +52,13 @@
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+  <div class="">
+      <%= button_to "Unhappy? Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+  </div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+
+  </div>
+
+</div>

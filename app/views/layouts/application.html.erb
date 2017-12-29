@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
 
     <% if user_signed_in? %>
-    <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=#{current_user.google_api_id}" %>
+    <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=#{current_user.google_api_key}" %>
     <% else %>
     <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?v=3&libraries=places" %>
     <% end %>
@@ -18,7 +18,7 @@
     <header>
       <div class="header">
         <% if user_signed_in? %>
-        <input type="hidden" name="google_api_key" id="google_api_key" value="<%=current_user.google_api_id%>">
+        <input type="hidden" name="google_api_key" id="google_api_key" value="<%=current_user.google_api_key%>">
         <%= image_tag current_user.avatar.url(:thumb), id: "user_avatar" %>
         <% end %>
       </div>
@@ -40,5 +40,9 @@
 
     <footer>
     </footer>
+
+    <script type="text/javascript">
+    setToggleMainMenu();
+    </script>
   </body>
 </html>

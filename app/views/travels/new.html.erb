@@ -1,2 +1,41 @@
-<h1>Travels#new</h1>
-<p>Find me in app/views/travels/new.html.erb</p>
+<h1>Create a new Travel</h1>
+<%= form_with model: @travel do |f| %>
+
+<%=   f.label "Name: " %>
+<%=   f.text_field :name %>
+
+<%=   f.label "Introduction: " %>
+<%=   f.text_area :introduction %>
+
+      <div class="">
+        <div class="">
+          <%=   f.label "Start: " %>
+          <%=   f.label "Place Name: " %>
+          <%=   f.text_field :start_name %>
+          <%=   f.label "Latitude: " %>
+          <%=   f.number_field :start_latitude, in: -180.0..180.0, step: 0.00001 %>
+          <%=   f.label "Longitude: " %>
+          <%=   f.number_field :start_longitude, in: -90.0..90.0, step: 0.00001 %>
+        </div>
+        <div class="">
+          <img src="" alt="Start place street view">
+        </div>
+      </div>
+
+      <div class="">
+        <div class="">
+          <%=   f.label "End: " %>
+          <%=   f.label "Place Name: " %>
+          <%=   f.text_field :end_name %>
+          <%=   f.label "Latitude: " %>
+          <%=   f.number_field :end_latitude, in: -180.0..180.0, step: 0.00001 %>
+          <%=   f.label "Longitude: " %>
+          <%=   f.number_field :end_longitude, in: -90.0..90.0, step: 0.00001 %>
+        </div>
+        <div class="">
+          <img src="" alt="End place street view">
+        </div>
+      </div>
+
+<%=   f.submit %>
+<% end %>

@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171228175521) do
+ActiveRecord::Schema.define(version: 20171229202216) do
 
   create_table "travels", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
-    t.string "from_name"
-    t.float "from_lagitude"
-    t.float "from_longitude"
-    t.string "to_name"
-    t.float "to_lagitude"
-    t.float "to_longitude"
+    t.text "introduction"
+    t.string "start_name"
+    t.float "start_latitude"
+    t.float "start_longitude"
+    t.string "end_name"
+    t.float "end_latitude"
+    t.float "end_longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,7 +44,7 @@ ActiveRecord::Schema.define(version: 20171228175521) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string "full_name"
-    t.string "google_api_id"
+    t.string "google_api_key"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
