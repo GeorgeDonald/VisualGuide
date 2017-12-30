@@ -127,9 +127,10 @@ article {
     1px 1px 0 white;
 }
 
-#guidmap {
-  width: 800px;
-  height: 400px;
+#map_auto_complete_input {
+  position: relative;
+  width: 760px;
+  left: calc((100vw - 800px) / 2 );
 }
 
 .hidden {

@@ -25,13 +25,18 @@
 </div>
 </div>
 
-<div class="center" id="guidmap"></div>
+<br>
+<input type="text" name="map_auto_complete_input" value="" id="map_auto_complete_input">
+<div class="center" id="guidmap">
+</div>
+
 <%= form_with model: @current_position, url: '/current_positions/update', html: {class: "hidden", id: "current_position_form"} do |f| %>
 <%= f.number_field :latitude %>
 <%= f.number_field :longitude %>
 <%= f.number_field :heading %>
 <%= f.number_field :pitch %>
 <% end %>
+
 <script type="text/javascript">
 window.onload=mainOnload();
 setReloadMap();

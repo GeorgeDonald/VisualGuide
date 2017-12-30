@@ -8,6 +8,7 @@ function mainOnload(){
   };
   var map = null;
   var marker = null;
+  var autocomplete = null;
   const RoE = 6371e3;
 
   function makeUrl(prms){
@@ -38,6 +39,21 @@ function mainOnload(){
       defaultPrms.longitude=e.latLng.lng();
       locateMap();
     });
+
+    var input = document.getElementById('map_auto_complete_input');
+    if(input) {
+      autocomplete = new google.maps.places.Autocomplete(input);
+      input.addEventListener('keydown',e=>{
+        if(e.key=='Enter'){
+          var place = autocomplete.getPlace();
+          if(place) {
+            defaultPrms.latitude=place.geometry.location.lat();
+            defaultPrms.longitude=place.geometry.location.lng();
+            locateMap();
+          }
+        }
+      });
+    }
   }
 
   function updateMapInfo(){
