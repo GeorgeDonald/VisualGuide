@@ -4,7 +4,7 @@
       <div class="left_part">
         <%=   f.label "Start: " %>
         <div class="preview_street_view">
-          <img src="" alt="Start place street view">
+          <img src="<%=getStreetViewUrl(@travel.start_latitude, @travel.start_longitude)%>" alt="Start place street view">
         </div>
         <div class="">
           <div class="field">
@@ -38,7 +38,7 @@
       <div class="right_part">
         <%=   f.label "End: " %> <br />
         <div class="preview_street_view">
-          <img src="" alt="End place street view">
+          <img src="<%=getStreetViewUrl(@travel.end_latitude, @travel.end_longitude)%>" alt="End place street view">
         </div>
         <div class="">
           <div class="field">
@@ -47,11 +47,11 @@
           </div>
           <div class="field">
           <%=   f.label "Latitude: " %> <br />
-          <%=   f.number_field :end_latitude, in: -180.0..180.0, step: 0.00001 %>
+          <%=   f.number_field :end_latitude, in: -90.0..90.0, step: 0.00001 %>
           </div>
           <div class="field">
           <%=   f.label "Longitude: " %> <br />
-          <%=   f.number_field :end_longitude, in: -90.0..90.0, step: 0.00001 %>
+          <%=   f.number_field :end_longitude, in: -180.0..180.0, step: 0.00001 %>
           </div>
         </div>
       </div>

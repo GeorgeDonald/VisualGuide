@@ -8,6 +8,11 @@ class TravelsController < ApplicationController
 
   def new
     @travel = Travel.new
+    pos = getCurUserPos
+    @travel.start_latitude = pos[:latitude];
+    @travel.start_longitude = pos[:longitude];
+    @travel.end_latitude = pos[:latitude];
+    @travel.end_longitude = pos[:longitude];
   end
 
   def edit
@@ -20,7 +25,7 @@ class TravelsController < ApplicationController
   def create
     binding.pry
     Travel.create(travel_params)
-    redirect travels_path
+    redirect_to travels_path
   end
 
   def update
@@ -38,6 +43,7 @@ class TravelsController < ApplicationController
 
   private
   def travel_params
-    params.require(:travel).permit(:name)
+    params['travel']['user_id']=current_user.id;
+    params.require(:travel).permit(:user_id, :name, :introduction, :start_name, :start_latitude, :start_longitude, :end_name, :end_latitude, :end_longitude)
   end
 end
