@@ -1,3 +1,4 @@
+require 'pry'
 class TravelsController < ApplicationController
   before_action :authenticate_user!
 
@@ -17,6 +18,7 @@ class TravelsController < ApplicationController
   end
 
   def create
+    binding.pry
     Travel.create(travel_params)
     redirect travels_path
   end
@@ -31,7 +33,7 @@ class TravelsController < ApplicationController
     if(@travel)
       @travel.destroy
     end
-    redirect travels_path
+    redirect_to travels_path
   end
 
   private

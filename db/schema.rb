@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171229202216) do
+ActiveRecord::Schema.define(version: 20171230001250) do
+
+  create_table "current_positions", force: :cascade do |t|
+    t.integer "user_id"
+    t.float "latitude"
+    t.float "longitude"
+    t.float "heading"
+    t.float "pitch"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "travels", force: :cascade do |t|
     t.integer "user_id"

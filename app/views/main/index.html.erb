@@ -1,10 +1,22 @@
 <div class="map center" id="streetview">
-<img alt="street view" id='map_image' />
+<%
+  latitude = 39.95259199321605
+  longitude = -75.16522200000003
+  heading = 0
+  pitch = 0
+  if(current_user.current_position)
+    latitude = current_user.current_position.latitude
+    longitude = current_user.current_position.longitude
+    heading = current_user.current_position.heading
+    pitch = current_user.current_position.pitch
+  end
+%>
+<img src="<%=getStreetViewUrl(latitude,longitude,heading,pitch)%>" alt="street view" id='map_image' />
 <div id="lat_lon">
-  <div class="strike" id="lat"></div>
-  <div class="strike" id="lon"></div>
-  <div class="strike" id="heading"></div>
-  <div class="strike" id="pitch"></div>
+  <div class="strike">latitude: <span id="lat"><%=latitude.to_s%></span> </div>
+  <div class="strike">longitude: <span id="lon"><%=longitude.to_s%></span> </div>
+  <div class="strike">heading: <span id="heading"><%=heading.to_s%></span> </div>
+  <div class="strike">pitch: <span id="pitch"><%=pitch.to_s%></span> </div>
 </div>
 <div id="map_ctrl">
   <div class="map_ctrl_item" id="map_ctrl_turnleft">⟲</div>
@@ -24,6 +36,12 @@
 </div>
 
 <div class="center" id="guidmap"></div>
+<%= form_with model: @current_position, url: '/current_positions/update', html: {class: "hidden", id: "current_position_form"} do |f| %>
+<%= f.number_field :latitude %>
+<%= f.number_field :longitude %>
+<%= f.number_field :heading %>
+<%= f.number_field :pitch %>
+<% end %>
 <script type="text/javascript">
 window.onload=mainOnload();
 setReloadMap();

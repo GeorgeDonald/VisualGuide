@@ -1,0 +1,2 @@
+module CurrentPositionsHelper
+end

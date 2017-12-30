@@ -1,6 +1,11 @@
 function mainOnload(){
   var url = "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120";
-  var defaultPrms={latitude:39.95259199321605,longitude: -75.16522200000003,heading: 0.0, pitch: 0.0};
+  var defaultPrms={
+    latitude: parseFloat(document.querySelector("#lat").innerText),
+    longitude: parseFloat(document.querySelector("#lon").innerText),
+    heading: parseFloat(document.querySelector("#heading").innerText),
+    pitch: parseFloat(document.querySelector("#pitch").innerText)
+  };
   var map = null;
   var marker = null;
   const RoE = 6371e3;
@@ -35,20 +40,52 @@ function mainOnload(){
     });
   }
 
-  function locateMap(){
+  function updateMapInfo(){
     document.querySelector("#map_image").src=makeUrl(defaultPrms);
-    document.querySelector("#lat").innerText=`Latitude: ${defaultPrms.latitude}`;
-    document.querySelector("#lon").innerText=`Longitude: ${defaultPrms.longitude}`;
-    document.querySelector("#heading").innerText=`Heading: ${defaultPrms.heading}`;
+    document.querySelector("#lat").innerText=`${defaultPrms.latitude}`;
+    document.querySelector("#lon").innerText=`${defaultPrms.longitude}`;
+    document.querySelector("#heading").innerText=`${defaultPrms.heading}`;
+    document.querySelector("#pitch").innerText=`${defaultPrms.pitch}`;
 
     document.querySelector("#compass").style.transform = `rotate(${defaultPrms.heading}deg)`
+  }
 
-    document.querySelector("#pitch").innerText=`Ptch: ${defaultPrms.pitch}`;
+  function centerMap(){
     var center = {lat: defaultPrms.latitude, lng: defaultPrms.longitude};
     map.setCenter(center);
     if(marker!=null)
       marker.setMap(null);
     marker = new google.maps.Marker({position: center,map: map});
+  }
+
+  function locateMap(){
+    updateMapInfo();
+    centerMap();
+  }
+
+  function saveCurrPos(){
+    var frm = document.querySelector("#current_position_form");
+    if(!frm)return;
+
+    var fd = new FormData();
+    fd.append(frm.children[0].name, frm.children[0].value)
+    fd.append(frm.children[1].name, frm.children[1].value)
+    fd.append('current_position[latitude]', `${defaultPrms.latitude}`);
+    fd.append('current_position[longitude]', `${defaultPrms.longitude}`);
+    fd.append('current_position[heading]', `${defaultPrms.heading}`);
+    fd.append('current_position[pitch]', `${defaultPrms.pitch}`);
+    fd.append("commit", "Update");
+    fd.append("controller", "current_positions");
+    fd.append("action", "update");
+
+    $.ajax({
+        type: 'POST',
+        url: '/current_positions/update',
+        data: fd,
+        processData: false,
+        contentType: false
+    }).done(function(data) {
+    });
   }
 
   function onKeyDown(key){
@@ -104,8 +141,10 @@ function mainOnload(){
         care = false;
         break;
     }
-    if(care)
+    if(care){
       locateMap();
+      saveCurrPos();
+    }
     return care;
   }
 
@@ -165,8 +204,9 @@ function mainOnload(){
 
   respMapCtrlItem();
   initMap();
-  locateMap();
-  getLocation();
+  centerMap();
+  //locateMap();
+  //getLocation();
 }
 
 function setReloadMap(){
