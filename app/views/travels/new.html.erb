@@ -13,11 +13,11 @@
           </div>
           <div class="field">
           <%=   f.label "Latitude: " %><br />
-          <%=   f.number_field :start_latitude, in: -180.0..180.0, step: 0.00001 %>
+          <%=   f.number_field :start_latitude, in: -180.0..180.0, step: 0.000000000000001 %>
           </div>
           <div class="field">
           <%=   f.label "Longitude: " %><br />
-          <%=   f.number_field :start_longitude, in: -90.0..90.0, step: 0.00001 %>
+          <%=   f.number_field :start_longitude, in: -90.0..90.0, step: 0.000000000000001 %>
           </div>
         </div>
       </div>
@@ -47,14 +47,14 @@
           </div>
           <div class="field">
           <%=   f.label "Latitude: " %> <br />
-          <%=   f.number_field :end_latitude, in: -90.0..90.0, step: 0.00001 %>
+          <%=   f.number_field :end_latitude, in: -90.0..90.0, step: 0.000000000000001 %>
           </div>
           <div class="field">
           <%=   f.label "Longitude: " %> <br />
-          <%=   f.number_field :end_longitude, in: -180.0..180.0, step: 0.00001 %>
+          <%=   f.number_field :end_longitude, in: -180.0..180.0, step: 0.000000000000001 %>
           </div>
         </div>
       </div>
 <% end %>
-
+<p id='notice'><%= notice %></p>
 </div>

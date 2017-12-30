@@ -23,14 +23,17 @@ class TravelsController < ApplicationController
   end
 
   def create
-    binding.pry
-    Travel.create(travel_params)
-    redirect_to travels_path
+    travel = Travel.new(travel_params)
+    if(travel.save)
+      redirect_to travels_path
+    else
+      redirect_to new_travel_path, notice: "Error occured."
+    end
   end
 
   def update
     @travel = Travel.find(params[:id])
-    redirect travels_path
+    redirect_to travels_path
   end
 
   def destroy

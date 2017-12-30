@@ -4,30 +4,35 @@
 
 <% @travels.each do |t| %>
   <div class="travel_item">
-    <div class="travel_item_from_img">
+    <div class="travel_item_img">
       <img src="<%=getStreetViewUrl(t.start_latitude, t.start_longitude)%>" alt="Travel starting position image">
     </div>
 
     <div class="travel_item_body">
       <div class="travel_item_name">
         <div><%= t.name %></div>
-        <div><%= link_to "Edit", edit_travel_path(@travel) %></div>
-        <div><%= link_to "Delete", travel_path(@travel), method: :delete %></div>
+        <div><%= link_to "Edit", edit_travel_path(t) %> -
+        <%= link_to "Delete", travel_path(t), method: :delete %></div>
       </div>
       <div class="travel_item_from_info">
-        <p><%= t.atart_name %></p>
+        <p>Start: <%= t.start_name %></p>
         <p><%= t.start_latitude %></p>
         <p><%= t.start_longitude %></p>
       </div>
       <div class="travel_item_end_info">
-        <p><%= t.end_name %></p>
+        <p>End: <%= t.end_name %></p>
         <p><%= t.end_latitude %></p>
         <p><%= t.end_longitude %></p>
       </div>
     </div>
 
-    <div class="travel_item_end_img">
+    <div class="travel_item_img">
       <img src="<%=getStreetViewUrl(t.end_latitude, t.end_longitude)%>" alt="Travel ending position image">
+    </div>
+
+    <div class="travel_item_introduction">
+      <h4>Introduction: </h4>
+      <%= t.introduction %>
     </div>
   </div>
 <% end %>
