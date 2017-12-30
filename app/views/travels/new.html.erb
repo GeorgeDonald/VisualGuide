@@ -1,41 +1,60 @@
+<div class="travel_pannel travel_new">
 <h1>Create a new Travel</h1>
 <%= form_with model: @travel do |f| %>
-
-<%=   f.label "Name: " %>
-<%=   f.text_field :name %>
-
-<%=   f.label "Introduction: " %>
-<%=   f.text_area :introduction %>
-
-      <div class="">
-        <div class="">
-          <%=   f.label "Start: " %>
-          <%=   f.label "Place Name: " %>
-          <%=   f.text_field :start_name %>
-          <%=   f.label "Latitude: " %>
-          <%=   f.number_field :start_latitude, in: -180.0..180.0, step: 0.00001 %>
-          <%=   f.label "Longitude: " %>
-          <%=   f.number_field :start_longitude, in: -90.0..90.0, step: 0.00001 %>
-        </div>
-        <div class="">
+      <div class="left_part">
+        <%=   f.label "Start: " %>
+        <div class="preview_street_view">
           <img src="" alt="Start place street view">
         </div>
+        <div class="">
+          <div class="field">
+          <%=   f.label "Place Name: " %><br />
+          <%=   f.text_field :start_name %>
+          </div>
+          <div class="field">
+          <%=   f.label "Latitude: " %><br />
+          <%=   f.number_field :start_latitude, in: -180.0..180.0, step: 0.00001 %>
+          </div>
+          <div class="field">
+          <%=   f.label "Longitude: " %><br />
+          <%=   f.number_field :start_longitude, in: -90.0..90.0, step: 0.00001 %>
+          </div>
+        </div>
       </div>
 
-      <div class="">
-        <div class="">
-          <%=   f.label "End: " %>
-          <%=   f.label "Place Name: " %>
-          <%=   f.text_field :end_name %>
-          <%=   f.label "Latitude: " %>
-          <%=   f.number_field :end_latitude, in: -180.0..180.0, step: 0.00001 %>
-          <%=   f.label "Longitude: " %>
-          <%=   f.number_field :end_longitude, in: -90.0..90.0, step: 0.00001 %>
+      <div class="middle_part">
+        <div class="field">
+          <%=   f.label "Name: " %> <br />
+          <%=   f.text_field :name %>
         </div>
-        <div class="">
+
+        <div class="field">
+          <%=   f.label "Introduction: " %><br />
+          <%=   f.text_area :introduction, id: "travel_introduction" %>
+        </div>
+        <%=   f.submit %>
+      </div>
+
+      <div class="right_part">
+        <%=   f.label "End: " %> <br />
+        <div class="preview_street_view">
           <img src="" alt="End place street view">
         </div>
+        <div class="">
+          <div class="field">
+            <%=   f.label "Place Name: " %> <br />
+            <%=   f.text_field :end_name %>
+          </div>
+          <div class="field">
+          <%=   f.label "Latitude: " %> <br />
+          <%=   f.number_field :end_latitude, in: -180.0..180.0, step: 0.00001 %>
+          </div>
+          <div class="field">
+          <%=   f.label "Longitude: " %> <br />
+          <%=   f.number_field :end_longitude, in: -90.0..90.0, step: 0.00001 %>
+          </div>
+        </div>
       </div>
-
-<%=   f.submit %>
 <% end %>
+
+</div>

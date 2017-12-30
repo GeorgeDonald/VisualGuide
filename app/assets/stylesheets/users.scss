@@ -1,3 +1,4 @@
+@import "_common";
 
 .user_pannel {
   display: grid;
@@ -25,23 +26,14 @@
   }
 }
 
-@mixin centerBlock($width, $height) {
-  position: absolute;
-  left: calc((100vw - #{$width}) / 2);
-  top: calc((100vh - #{$height}) / 2);
-  width: $width;
-  height: $height;
-  background-color: rgb(30,160,120);
-  color: white;
-}
 .user_login {
-  @include centerBlock(480px, 360px);
+  @include centerBlock(480px, 360px, $pannel_bkgnd, $pannel_fntclr);
 }
 
 .user_signup {
-  @include centerBlock(520px, 390px);
+  @include centerBlock(520px, 390px, $pannel_bkgnd, $pannel_fntclr);
 }
 
 .user_update {
-  @include centerBlock(640px, 500px);
+  @include centerBlock(640px, 500px, $pannel_bkgnd, $pannel_fntclr);
 }

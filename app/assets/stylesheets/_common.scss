@@ -1,0 +1,13 @@
+$pannel_bkgnd: rgb(30,160,120);
+$pannel_fntclr: white;
+
+
+@mixin centerBlock($width, $height, $bkclr, $frclr) {
+  position: absolute;
+  left: calc((100vw - #{$width}) / 2);
+  top: calc((100vh - #{$height}) / 2);
+  width: $width;
+  height: $height;
+  background-color: $bkclr;
+  color: $frclr;
+}
