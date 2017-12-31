@@ -144,6 +144,10 @@ article {
   @include generalButton($btnClrText, $btnClrNormal, $btnClrHover, $btnClrActive, 32px, 24px, 0px);
 }
 
+.middle_button {
+  @include generalButton($btnClrText, $btnClrNormal, $btnClrHover, $btnClrActive, 80px, 24px, 0px);
+}
+
 .search_place_input {
   margin: 0 auto;
   width: 740px;

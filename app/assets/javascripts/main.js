@@ -1,5 +1,4 @@
 function mainOnload(){
-  var url = "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120";
   var defaultPrms={
     latitude: parseFloat(document.querySelector("#lat").innerText),
     longitude: parseFloat(document.querySelector("#lon").innerText),
@@ -11,20 +10,12 @@ function mainOnload(){
   var autocomplete = null;
   const RoE = 6371e3;
 
-  function makeUrl(prms){
-    var key = '';
-    var eleGak = document.getElementById("google_api_key");
-    if(eleGak && eleGak.value)
-      key = `&key=${eleGak.value}`;
-    return `${url}&location=${prms.latitude},${prms.longitude}&heading=${prms.heading}&pitch=${prms.pitch}${key}`;
-  }
-
   function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((pos)=>{
           defaultPrms.latitude = pos.coords.latitude;
           defaultPrms.longitude = pos.coords.longitude;
-          locateMap();
+          locateAndSave();
         });
       }
   }
@@ -34,40 +25,36 @@ function mainOnload(){
     if(place) {
       defaultPrms.latitude=place.geometry.location.lat();
       defaultPrms.longitude=place.geometry.location.lng();
-      locateMap();
-      saveCurrPos();
+      locateAndSave();
     }
   }
 
   function initMap() {
-    map = new google.maps.Map(document.getElementById('guidmap'), {
-      center: {lat: defaultPrms.latitude, lng: defaultPrms.longitude},
-      zoom: 15
-    });
-    map.addListener('click', (e)=>{
-      defaultPrms.latitude=e.latLng.lat();
-      defaultPrms.longitude=e.latLng.lng();
-      locateMap();
-    });
-
-    var input = document.getElementById('map_auto_complete_input');
-    if(input) {
-      autocomplete = new google.maps.places.Autocomplete(input);
-      input.addEventListener('keydown',e=>{
+    var ret = initGoogleMap('guidmap',
+      defaultPrms.latitude,
+      defaultPrms.longitude,
+      (e)=>{
+        defaultPrms.latitude=e.latLng.lat();
+        defaultPrms.longitude=e.latLng.lng();
+        locateAndSave();
+      },
+      'map_auto_complete_input',
+      e=>{
         if(e.key=='Enter'){
           getPlace();
         }
-      });
-
-      var btn = document.getElementById('map_search_button');
-      if(btn){
-        btn.addEventListener('click',e=>getPlace());
-      }
+      },
+      'map_search_button',
+      e=>getPlace()
+    );
+    if(ret){
+      map=ret.map;
+      autocomplete=ret.autocomplete;
     }
   }
 
   function updateMapInfo(){
-    document.querySelector("#map_image").src=makeUrl(defaultPrms);
+    document.querySelector("#map_image").src=makeGoogleStreetViewUrl(defaultPrms);
     document.querySelector("#lat").innerText=`${defaultPrms.latitude}`;
     document.querySelector("#lon").innerText=`${defaultPrms.longitude}`;
     document.querySelector("#heading").innerText=`${defaultPrms.heading}`;
@@ -87,6 +74,11 @@ function mainOnload(){
   function locateMap(){
     updateMapInfo();
     centerMap();
+  }
+
+  function locateAndSave(){
+    locateMap();
+    saveCurrPos();
   }
 
   function saveCurrPos(){
@@ -168,8 +160,7 @@ function mainOnload(){
         break;
     }
     if(care){
-      locateMap();
-      saveCurrPos();
+      locateAndSave();
     }
     return care;
   }
