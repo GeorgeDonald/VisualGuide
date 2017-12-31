@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'main/index'
 
-  resources :travels, only: [:index,:new,:edit,:show,:destroy,:create]
+  resources :travels, only: [:index,:new,:edit,:show,:destroy,:create,:update]
   devise_for :users, controllers: {
         registrations: 'users/registrations'
       }

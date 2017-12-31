@@ -11,8 +11,11 @@
     <div class="travel_item_body">
       <div class="travel_item_name">
         <div><%= t.name %></div>
-        <div><%= link_to "Edit", edit_travel_path(t) %> -
-        <%= link_to "Delete", travel_path(t), method: :delete %></div>
+        <div>
+          <%= link_to "Edit", edit_travel_path(t) %> -
+          <%= link_to "Delete", travel_path(t), method: :delete %> -
+          <%= link_to "Play", travel_path(t) %>
+        </div>
       </div>
       <div class="travel_item_from_info">
         <p>Start: <%= t.start_name %></p>

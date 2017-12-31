@@ -20,6 +20,7 @@ class TravelsController < ApplicationController
   end
 
   def show
+    @travel = Travel.find(params[:id])
   end
 
   def create
@@ -33,7 +34,11 @@ class TravelsController < ApplicationController
 
   def update
     @travel = Travel.find(params[:id])
-    redirect_to travels_path
+    if(@travel.update(travel_params))
+      redirect_to travels_path
+    else
+      redirect_to edit_travel_path, notice: "Error occured."
+    end
   end
 
   def destroy
