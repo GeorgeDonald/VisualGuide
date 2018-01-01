@@ -8,7 +8,6 @@ function mainOnload(){
   var map = null;
   var marker = null;
   var autocomplete = null;
-  const RoE = 6371e3;
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -53,31 +52,8 @@ function mainOnload(){
     }
   }
 
-  function updateMapInfo(){
-    document.querySelector("#map_image").src=makeGoogleStreetViewUrl(defaultPrms);
-    document.querySelector("#lat").innerText=`${defaultPrms.latitude}`;
-    document.querySelector("#lon").innerText=`${defaultPrms.longitude}`;
-    document.querySelector("#heading").innerText=`${defaultPrms.heading}`;
-    document.querySelector("#pitch").innerText=`${defaultPrms.pitch}`;
-
-    document.querySelector("#compass").style.transform = `rotate(${defaultPrms.heading}deg)`
-  }
-
-  function centerMap(){
-    var center = {lat: defaultPrms.latitude, lng: defaultPrms.longitude};
-    map.setCenter(center);
-    if(marker!=null)
-      marker.setMap(null);
-    marker = new google.maps.Marker({position: center,map: map});
-  }
-
-  function locateMap(){
-    updateMapInfo();
-    centerMap();
-  }
-
   function locateAndSave(){
-    locateMap();
+    marker = locateMap(defaultPrms, map, marker);
     saveCurrPos();
   }
 
@@ -107,62 +83,12 @@ function mainOnload(){
   }
 
   function onKeyDown(key){
-    var care = true;
-    switch(key){
-      case "ArrowLeft":  //left arrow
-        defaultPrms.heading-=1.0;
-        if(defaultPrms.heading<0.0)
-          defaultPrms.heading+=360.0;
-        break;
-      case "ArrowUp":  //up arrow
-        ll = new LatLon(defaultPrms.latitude,defaultPrms.longitude);
-        ll = ll.destinationPoint(1,defaultPrms.heading,RoE);
-        defaultPrms.latitude = ll.lat;
-        defaultPrms.longitude = ll.lon;
-        break;
-      case "ArrowRight":  //right arrow
-        defaultPrms.heading+=1.0;
-        if(defaultPrms.heading>360.0)
-          defaultPrms.heading-=360.0;
-        break;
-      case "ArrowDown":  //down arrow
-        ll = new LatLon(defaultPrms.latitude,defaultPrms.longitude);
-        ll = ll.destinationPoint(1,(defaultPrms.heading+180)%360,RoE);
-        defaultPrms.latitude = ll.lat;
-        defaultPrms.longitude = ll.lon;
-        break;
-      case "PageUp":
-        defaultPrms.pitch += 1;
-        if(defaultPrms.pitch > 90)
-          defaultPrms.pitch = 90;
-        break;
-      case "PageDown":
-        defaultPrms.pitch -= 1;
-        if(defaultPrms.pitch < -90)
-          defaultPrms.pitch = -90;
-        break;
-      case ",":
-        ll = new LatLon(defaultPrms.latitude,defaultPrms.longitude);
-        hd = defaultPrms.heading-90;
-        if(hd < 0) hd += 360;
-        ll = ll.destinationPoint(1,hd,RoE);
-        defaultPrms.latitude = ll.lat;
-        defaultPrms.longitude = ll.lon;
-        break;
-      case ".":
-        ll = new LatLon(defaultPrms.latitude,defaultPrms.longitude);
-        ll = ll.destinationPoint(1,(defaultPrms.heading+90)%360,RoE);
-        defaultPrms.latitude = ll.lat;
-        defaultPrms.longitude = ll.lon;
-        break;
-      default:
-        care = false;
-        break;
-    }
-    if(care){
+    var prms = onPlayStreamViewKeyDown(key, defaultPrms);
+    if(prms.care){
+      defaultPrms = prms;
       locateAndSave();
     }
-    return care;
+    return prms.care;
   }
 
   window.addEventListener('keydown', (e)=>{
@@ -171,57 +97,9 @@ function mainOnload(){
       e.preventDefault();
   });
 
-  function resizeElement(eleid, cxs, cx, cys, cy){
-      if((cxs!=='+'&&cxs!=='-')||(cys!=='+'&&cys!=='-'))
-        return;
-
-      var ele = document.querySelector(eleid);
-      if(!ele)return;
-      var styl = window.getComputedStyle(ele);
-      var width = parseInt(styl["width"]);
-      var height = parseInt(styl["height"]);
-      if(((cxs === "+" && width < 4096) || (cxs === '-' && width > 120)) &&
-        ((cys === "+" && height < 3072) || (cys === '-' && height > 90))){
-        ele.style.width = `calc(${styl["width"]} ${cxs} ${cx})`;
-        ele.style.height = `calc(${styl["height"]} ${cys} ${cy})`;
-      }
-  }
-
-  function respMapCtrlItem(){
-    var items = [{id: "#map_ctrl_turnleft", key: "ArrowLeft"},
-      {id:"#map_ctrl_forward", key: "ArrowUp"},
-      {id:"#map_ctrl_turnright", key: "ArrowRight"},
-      {id:"#map_ctrl_moveleft", key: ","},
-      {id:"#map_ctrl_moveright", key: "."},
-      {id:"#map_ctrl_enlarge", func: ()=>{resizeElement("#streetview","+","40px","+", "30px");}},
-      {id:"#map_ctrl_backward", key: "ArrowDown"},
-      {id:"#map_ctrl_shrink", func: ()=>{resizeElement("#streetview","-","40px","-", "30px");}}
-    ];
-    items.forEach((e)=>{
-      var timerID = undefined;
-      var ele = document.querySelector(e.id);
-      if(ele){
-        if(e.key){
-          ele.addEventListener('mousedown',()=>{
-            onKeyDown(e.key);
-            timerID=setInterval(()=>onKeyDown(e.key),100);
-          });
-          window.addEventListener('mouseup',()=>{
-            if(timerID!=undefined){
-              clearInterval(timerID);
-              timerID = undefined;
-            }
-          });
-        }
-        else if(e.func)
-          ele.addEventListener('click',()=>e.func());
-      }
-    });
-  }
-
-  respMapCtrlItem();
+  respMapCtrlItem(onKeyDown);
   initMap();
-  centerMap();
+  marker = centerMap(defaultPrms, map, marker);
   //locateMap();
   //getLocation();
 }

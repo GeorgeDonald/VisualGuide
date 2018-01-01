@@ -107,3 +107,10 @@
 .inline {
   display: inline-block;
 }
+
+.travel_play_ctrl {
+  width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 32px 32px 180px;
+}
