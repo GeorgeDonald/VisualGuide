@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171230001250) do
+ActiveRecord::Schema.define(version: 20180101152507) do
 
   create_table "current_positions", force: :cascade do |t|
     t.integer "user_id"
@@ -18,6 +18,22 @@ ActiveRecord::Schema.define(version: 20171230001250) do
     t.float "longitude"
     t.float "heading"
     t.float "pitch"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "followers", force: :cascade do |t|
+    t.integer "guide_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "guides", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "description"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
