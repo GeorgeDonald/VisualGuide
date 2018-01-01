@@ -1,3 +1,54 @@
 // Place all the styles related to the Guides controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "_common";
+
+.guide_pannel{
+  @include centerBlock(1024px, 540px, $pannel_bkgnd, $pannel_fntclr);
+
+  h1 {
+    text-align: center;
+  }
+  #notice{
+    margin: 0 20px;
+  }
+  form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    .guide_item_img {
+      margin: 4% 4%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .guide_item_body {
+      &,
+      & > *,
+      & > * > *,
+      & > * > * > * {
+        margin: 0 auto;
+        width: 470px;
+      }
+    }
+    #guide_item_description{
+      height: 170px;
+    }
+  }
+}
+
+.guide_item {
+  margin: 0 auto;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  .guide_item_img {
+    width: 98%;
+    height: 98%;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

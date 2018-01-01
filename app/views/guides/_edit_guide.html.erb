@@ -1,0 +1,50 @@
+<div class="guide_pannel">
+  <h1><%= @current_page_title %></h1>
+  <%= form_with model: @guide do |f| %>
+  <div class="guide_item_img">
+    <img src="<%=getStreetViewUrl(@guide.latitude, @guide.longitude,@guide.heading,@guide.pitch)%>" alt="street view image" id="guide_image">
+  </div>
+  <div class="guide_item_body">
+    <div class="field">
+      <%= f.label "Title: " %><br />
+      <%= f.text_field :title, id: "guide_title" %>
+    </div>
+    <div class="field">
+      <%= f.label "Description: " %><br />
+      <%= f.text_area :description, id: "guide_item_description" %>
+    </div>
+    <div class="field">
+      <%= f.label "latitude: " %><br />
+      <%= f.number_field :latitude, in: -90.0..90.0, step: 0.000000000000001, id: "guide_latitude" %>
+    </div>
+    <div class="field">
+      <%= f.label "longitude: " %><br />
+      <%= f.number_field :longitude, in: -180.0..180.0, step: 0.000000000000001, id: "guide_longitude" %>
+    </div>
+    <div class="field">
+      <%= f.label "heading: " %><br />
+      <%= f.number_field :heading, in: 0.0..360.0, step: 0.01, id: "guide_heading" %>
+    </div>
+    <div class="field">
+      <%= f.label "pitch: " %><br />
+      <%= f.number_field :pitch, in: -90.0..90.0, step: 1, id: "guide_pitch" %>
+    </div>
+    <%= f.submit %>
+  </div>
+  <% end %>
+  <div id="notice"> <%= notice %></div>
+</div>
+
+<div class="modal hidden" id="map_container">
+  <div class="full" id="select_place_map"></div>
+  <div class="float_top_center">
+    <input type="inline text" name="map_auto_complete_input" value="" id="select_auto_complete_input">
+    <div class="inline little_button" id="select_search_button"> -&gt; </div>
+    <div class="inline middle_button" id="select_ok_button"> OK </div>
+    <div class="inline middle_button" id="select_cancel_button"> Cancel </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  initNewGuidePage();
+</script>

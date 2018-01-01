@@ -74,7 +74,7 @@ function selectPlace(img, name, lat, lng){
   }
 
   function doOK(){
-    if(temp_name)name.value=temp_name;
+    if(temp_name && name.value.length == 0)name.value=temp_name;
     if(temp_lat)lat.value=temp_lat;
     if(temp_lng)lng.value=temp_lng;
     ctn.classList.add('hidden');

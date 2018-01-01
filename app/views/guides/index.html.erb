@@ -1,2 +1,15 @@
-<h1>Guides#index</h1>
-<p>Find me in app/views/guides/index.html.erb</p>
+
+<h1>My Guides: </h1>
+<%= link_to "Create a new guide", new_guide_path %>
+
+<% @is_my_guide = true %>
+<% @my_guides.each do |g| %>
+  <% @g = g %>
+  <%= render "guide_item" %>
+<% end %>
+
+<% @is_my_guide = false %>
+<h1>View Other Guides: </h1>
+<% @other_guides.each do |g| %>
+  render "guide_item"
+<% end %>

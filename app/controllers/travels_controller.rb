@@ -11,8 +11,12 @@ class TravelsController < ApplicationController
     pos = getCurUserPos
     @travel.start_latitude = pos[:latitude];
     @travel.start_longitude = pos[:longitude];
+    @travel.start_heading = pos[:heading];
+    @travel.start_pitch = pos[:pitch];
     @travel.end_latitude = pos[:latitude];
     @travel.end_longitude = pos[:longitude];
+    @travel.end_heading = pos[:heading];
+    @travel.end_pitch = pos[:pitch];
   end
 
   def edit

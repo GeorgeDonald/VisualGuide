@@ -1,0 +1,35 @@
+                  Prefix Verb   URI Pattern                         Controller#Action
+                    root GET    /                                   main#index
+              main_index GET    /main/index(.:format)               main#index
+                  guides GET    /guides(.:format)                   guides#index
+                         POST   /guides(.:format)                   guides#create
+               new_guide GET    /guides/new(.:format)               guides#new
+              edit_guide GET    /guides/:id/edit(.:format)          guides#edit
+                   guide GET    /guides/:id(.:format)               guides#show
+                         PATCH  /guides/:id(.:format)               guides#update
+                         PUT    /guides/:id(.:format)               guides#update
+                         DELETE /guides/:id(.:format)               guides#destroy
+                 travels GET    /travels(.:format)                  travels#index
+                         POST   /travels(.:format)                  travels#create
+              new_travel GET    /travels/new(.:format)              travels#new
+             edit_travel GET    /travels/:id/edit(.:format)         travels#edit
+                  travel GET    /travels/:id(.:format)              travels#show
+                         PATCH  /travels/:id(.:format)              travels#update
+                         PUT    /travels/:id(.:format)              travels#update
+                         DELETE /travels/:id(.:format)              travels#destroy
+        new_user_session GET    /users/sign_in(.:format)            devise/sessions#new
+            user_session POST   /users/sign_in(.:format)            devise/sessions#create
+    destroy_user_session DELETE /users/sign_out(.:format)           devise/sessions#destroy
+       new_user_password GET    /users/password/new(.:format)       devise/passwords#new
+      edit_user_password GET    /users/password/edit(.:format)      devise/passwords#edit
+           user_password PATCH  /users/password(.:format)           devise/passwords#update
+                         PUT    /users/password(.:format)           devise/passwords#update
+                         POST   /users/password(.:format)           devise/passwords#create
+cancel_user_registration GET    /users/cancel(.:format)             users/registrations#cancel
+   new_user_registration GET    /users/sign_up(.:format)            users/registrations#new
+  edit_user_registration GET    /users/edit(.:format)               users/registrations#edit
+       user_registration PATCH  /users(.:format)                    users/registrations#update
+                         PUT    /users(.:format)                    users/registrations#update
+                         DELETE /users(.:format)                    users/registrations#destroy
+                         POST   /users(.:format)                    users/registrations#create
+current_positions_update POST   /current_positions/update(.:format) current_positions#update
