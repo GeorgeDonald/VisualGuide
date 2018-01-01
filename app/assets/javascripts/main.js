@@ -100,6 +100,7 @@ function mainOnload(){
   respMapCtrlItem(onKeyDown);
   initMap();
   marker = centerMap(defaultPrms, map, marker);
+  E("compass").style.transform = `rotate(${defaultPrms.heading}deg)`
   //locateMap();
   //getLocation();
 }
