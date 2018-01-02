@@ -24,6 +24,19 @@ class GuidesController < ApplicationController
     @guide.pitch = pos[:pitch];
   end
 
+  def stop
+    @guide = Guide.find(params[:id])
+    if(@guide)
+      if(@guide.user_id==current_user.id)
+        @guide.status=0
+        @guide.save
+      else
+        Follower.where("guide_id = #{@guide.id} and user_id = #{current_user.id}").delete_all
+      end
+    end
+    redirect_to guides_path
+  end
+
   def edit
     @guide = Guide.find(params[:id])
   end

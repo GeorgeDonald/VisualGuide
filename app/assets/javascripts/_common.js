@@ -156,13 +156,11 @@ function respMapCtrlItem(onKeyDown){
     {id:"#map_ctrl_shrink", func: ()=>{resizeElement("#streetview","-","40px","-", "30px");}}
   ];
 
-  var key_element = {};
   items.forEach((e)=>{
     var timerID = undefined;
     var ele = document.querySelector(e.id);
     if(ele){
       if(e.key){
-        key_element[e.key]=ele;
         ele.addEventListener('mousedown',()=>{
           onKeyDown(e.key);
           timerID=setInterval(()=>onKeyDown(e.key),100);
@@ -178,7 +176,6 @@ function respMapCtrlItem(onKeyDown){
         ele.addEventListener('click',e.func);
     }
   });
-  return key_element;
 }
 
 function initStreetViewWithMap(onchange){
@@ -191,7 +188,6 @@ function initStreetViewWithMap(onchange){
   var map = null;
   var marker = null;
   var autocomplete = null;
-  var key_element = null;
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -217,6 +213,9 @@ function initStreetViewWithMap(onchange){
       defaultPrms.latitude,
       defaultPrms.longitude,
       (e)=>{
+        if(!E("map_ctrl"))
+          return;
+
         defaultPrms.latitude=e.latLng.lat();
         defaultPrms.longitude=e.latLng.lng();
         locateAndSave();
@@ -247,7 +246,7 @@ function initStreetViewWithMap(onchange){
   }
 
   function onKeyDown(key){
-    if(!key_element[key])
+    if(!E("map_ctrl"))
       return false;
 
     var prms = onPlayStreetViewKeyDown(key, defaultPrms);
@@ -264,7 +263,7 @@ function initStreetViewWithMap(onchange){
       e.preventDefault();
   });
 
-  key_element = respMapCtrlItem(onKeyDown);
+  respMapCtrlItem(onKeyDown);
   initMap();
   marker = centerMap(defaultPrms, map, marker);
   E("compass").style.transform = `rotate(${defaultPrms.heading}deg)`

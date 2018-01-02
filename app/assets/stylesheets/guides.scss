@@ -20,6 +20,7 @@
       img {
         width: 100%;
         height: 100%;
+        cursor: pointer;
       }
     }
 
@@ -38,17 +39,31 @@
   }
 }
 
-.guide_item {
-  margin: 0 auto;
-  width: 100vw;
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  .guide_item_img {
-    width: 98%;
-    height: 98%;
-    img{
-      width: 100%;
-      height: 100%;
+.guides_list {
+  h1 {
+    text-align: center;
+    font-family: sans-serif, fantasy;
+  }
+  #new_guide_link {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 240px;
+    text-align: center;
+  }
+  .guide_item {
+    margin: 0 auto;
+    border: 1px solid grey;
+    width: 1024px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    .guide_item_img {
+      width: 98%;
+      height: 98%;
+      img{
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

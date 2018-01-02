@@ -1,6 +1,6 @@
-
-<h1>My Guides: </h1>
-<%= link_to "Create a new guide", new_guide_path %>
+<div class="guides_list">
+<h1>My Guides</h1>
+<%= link_to "Create a new guide", new_guide_path, id: "new_guide_link" %> <br /><br />
 
 <% @is_my_guide = true %>
 <% @my_guides.each do |g| %>
@@ -9,8 +9,14 @@
 <% end %>
 
 <% @is_my_guide = false %>
-<h1>View Other Guides: </h1>
+<h1>View Guide Show</h1>
 <% @other_guides.each do |g| %>
   <% @g = g %>
   <%= render "guide_item" %>
 <% end %>
+
+</div>
+
+<script type="text/javascript">
+  initIndexGuidePage();
+</script>

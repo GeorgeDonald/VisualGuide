@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   }
 
   post '/current_positions/update', to: 'current_positions#update'
+  get '/guides/:id/stop', to: 'guides#stop'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

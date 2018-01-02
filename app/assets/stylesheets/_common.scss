@@ -11,3 +11,21 @@ $pannel_fntclr: white;
   background-color: $bkclr;
   color: $frclr;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+  background-color: rgb(222,222,222);
+  border: 2px solid grey;
+  padding: 0px 8px;
+  margin: 20px 0px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 10px;
+  &:hover{
+    border: 2px solid white;
+  }
+  &:active{
+    border: 2px solid black;
+  }
+}

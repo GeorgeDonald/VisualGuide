@@ -1,3 +1,9 @@
+<%= link_to @guide.user_id === current_user.id ? "Stop Guide" : "Leave Guide", "/guides/#{@guide.id}/stop", id: "stop_guide_show"%>
+
+<div class="">
+  <div class="" id="guide_status"></div>
+  <div class="" id="guide_followers"></div>
+</div>
 
 <div class="map center" id="streetview">
 <img src="<%= getStreetViewUrl(@guide.latitude,@guide.longitude,@guide.heading,@guide.pitch) %>" alt="street view" id='map_image' />
