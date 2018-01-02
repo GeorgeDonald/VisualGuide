@@ -253,7 +253,7 @@ function initShowTravelPage(){
   });
 
   function onKeyDown(key) {
-    var prms = onPlayStreamViewKeyDown(key, defaultPrms);
+    var prms = onPlayStreetViewKeyDown(key, defaultPrms);
     if(prms.care){
       defaultPrms = prms;
       marker = locateMap(defaultPrms, map, marker);

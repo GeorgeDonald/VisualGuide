@@ -7,7 +7,7 @@
     <% if @is_my_guide %>
     <div class="guide_item_name"><%= @g.title %></div>
     <% else %>
-    <%= link_to @g.title, guide_path(g) %>
+    <%= link_to @g.title, guide_path(@g) %>
     <% end %>
 
     <div class="guide_item_nav">

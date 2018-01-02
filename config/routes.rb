@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   resources :guides, only: [:index, :new, :edit, :show, :destroy, :create, :update]
   resources :travels, only: [:index, :new, :edit, :show, :destroy, :create, :update]
-  devise_for :users, controllers: {registrations: 'users/registrations'}
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
 
   post '/current_positions/update', to: 'current_positions#update'
 

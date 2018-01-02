@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :getStreetViewUrl, :getCurUserPos, :getCurUserStrtViewUrl
+  before_action :set_verify_cookie
+
+  def set_verify_cookie
+    #action cable needs a way outside of controller logic to lookup a user
+    return unless current_user
+    cookies.signed[:current_user_id] = current_user.id
+  end
 
   def getStreetViewUrl(latitude, longitude, heading = 0, pitch = 0)
     "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120&location=#{latitude},#{longitude}&heading=#{heading}&pitch=#{pitch}&key=#{current_user.google_api_key}"

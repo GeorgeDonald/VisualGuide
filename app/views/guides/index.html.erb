@@ -11,5 +11,6 @@
 <% @is_my_guide = false %>
 <h1>View Other Guides: </h1>
 <% @other_guides.each do |g| %>
-  render "guide_item"
+  <% @g = g %>
+  <%= render "guide_item" %>
 <% end %>

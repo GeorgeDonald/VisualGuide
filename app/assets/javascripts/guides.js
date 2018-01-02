@@ -7,3 +7,8 @@ function initNewGuidePage(){
         selectPlace(E('guide_image'), E('guide_title'), E('guide_latitude'), E('guide_longitude'));
       });
 }
+
+function initShowGuidePage(){
+  createGuideChannel(initStreetViewWithMap(sendGuideData));
+  setReloadMap(initStreetViewWithMap,sendGuideData);
+}
