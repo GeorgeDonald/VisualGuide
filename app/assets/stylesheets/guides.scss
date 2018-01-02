@@ -67,3 +67,68 @@
     }
   }
 }
+
+.guide_show_body {
+  display: grid;
+  grid-template-columns: 70% 30%;
+
+  .guide_show_viewmap{
+    overflow: scroll;
+  }
+
+  .chat_list {
+    background-color: $pannel_bkgnd;
+    max-height: 1280px;
+    overflow-y: scroll;
+
+    .chat_input_area{
+      display: grid;
+      grid-template-columns: 1fr;
+      border: 1px solid black;
+      label{
+        color: white;
+      }
+      #chat_input_message {
+        height: 80px;
+      }
+      #chat_input_send{
+        position: relative;
+        right: 0;
+      }
+    }
+  }
+}
+
+.guide_show_head{
+  & > *{
+    text-align: center;
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.chat_item {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  .chat_item_head {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    .chat_item_avatar {
+      .chat_item_img {
+        width: 100%;
+        height: auto;
+        background-size: 100% 100%;
+      }
+    }
+
+    .chat_item_info{
+      .chat_item_name{}
+      .chat_item_edit{}
+    }
+  }
+
+  .chat_item_message {
+
+  }
+}

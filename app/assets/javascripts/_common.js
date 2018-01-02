@@ -5,6 +5,14 @@ function Q(cls){return document.querySelectorAll(cls);}
 function hide(sel){document.querySelectorAll(sel).forEach(e=>e.classList.add('hidden'))}
 function show(sel){document.querySelectorAll(sel).forEach(e=>e.classList.remove('hidden'))}
 function onclick(id,cb){E(id).addEventListener('click',cb);}
+function newchild(tag,cls,id,father){
+  var ne = document.createElement(tag);
+  ne.classList.add(cls);
+  ne.id=id;
+  if(father)
+    father.appendChild(ne);
+  return ne;
+}
 
 function initGoogleMap(
   container_id,
@@ -258,6 +266,9 @@ function initStreetViewWithMap(onchange){
   }
 
   window.addEventListener('keydown', (e)=>{
+    if(e.target !== document.querySelector("body"))
+      return;
+      
     var care = onKeyDown(e.key);
     if(care)
       e.preventDefault();

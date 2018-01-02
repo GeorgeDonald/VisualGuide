@@ -20,6 +20,11 @@ function initShowGuidePage(){
   setReloadMap(initStreetViewWithMap,sendGuideData);
   onclick("stop_guide_show", destroyGuideChannel);
   requestUpdateStatus();
+  onclick("chat_input_send", e=>{
+    var msg = E("chat_input_message");
+    if(msg.value.length)
+      sendChatMessage(msg.value);
+  });
 }
 
 function onReceivedStatus(data){

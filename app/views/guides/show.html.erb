@@ -1,45 +1,63 @@
-<%= link_to @guide.user_id === current_user.id ? "Stop Guide" : "Leave Guide", "/guides/#{@guide.id}/stop", id: "stop_guide_show"%>
-
-<div class="">
-  <div class="" id="guide_status"></div>
-  <div class="" id="guide_followers"></div>
+<div class="guide_show_head">
+  <h1><%= @guide.title %></h1>
+  <div class="center_link">
+    <%= link_to @guide.user_id === current_user.id ? "Stop Guide" : "Leave Guide", "/guides/#{@guide.id}/stop", id: "stop_guide_show"%>
+  </div>
+  <% if @guide.user_id != current_user.id %>
+    <div class="">Guide status: <span id="guide_status"></span></div>
+  <% end %>
+  <div class="">Followers: <span id="guide_followers"></span></div>
 </div>
 
-<div class="map center" id="streetview">
-<img src="<%= getStreetViewUrl(@guide.latitude,@guide.longitude,@guide.heading,@guide.pitch) %>" alt="street view" id='map_image' />
-<div id="lat_lon">
-  <div class="strike">latitude: <span id="lat"><%=@guide.latitude.to_s%></span> </div>
-  <div class="strike">longitude: <span id="lon"><%=@guide.longitude.to_s%></span> </div>
-  <div class="strike">heading: <span id="heading"><%= @guide.heading%></span> </div>
-  <div class="strike">pitch: <span id="pitch"><%= @guide.pitch%></span> </div>
-</div>
+<div class="guide_show_body">
+  <div class="guide_show_viewmap">
+    <div class="map center" id="streetview">
+    <img src="<%= getStreetViewUrl(@guide.latitude,@guide.longitude,@guide.heading,@guide.pitch) %>" alt="street view" id='map_image' />
+    <div id="lat_lon">
+      <div class="strike">latitude: <span id="lat"><%=@guide.latitude.to_s%></span> </div>
+      <div class="strike">longitude: <span id="lon"><%=@guide.longitude.to_s%></span> </div>
+      <div class="strike">heading: <span id="heading"><%= @guide.heading%></span> </div>
+      <div class="strike">pitch: <span id="pitch"><%= @guide.pitch%></span> </div>
+    </div>
 
-<% if @guide.user_id === current_user.id %>
-<div class="hidden" id="map_ctrl">
-  <div class="map_ctrl_item" id="map_ctrl_turnleft">⟲</div>
-  <div class="map_ctrl_item" id="map_ctrl_forward">↑</div>
-  <div class="map_ctrl_item" id="map_ctrl_turnright">⟳</div>
-  <div class="map_ctrl_item" id="map_ctrl_moveleft">←</div>
-  <div class="map_ctrl_item" id="map_ctrl_none"></div>
-  <div class="map_ctrl_item" id="map_ctrl_moveright">→</div>
-  <div class="map_ctrl_item" id="map_ctrl_enlarge">+</div>
-  <div class="map_ctrl_item" id="map_ctrl_backward">↓</div>
-  <div class="map_ctrl_item" id="map_ctrl_shrink">-</div>
-</div>
-<% end %>
+    <% if @guide.user_id === current_user.id %>
+    <div class="hidden" id="map_ctrl">
+      <div class="map_ctrl_item" id="map_ctrl_turnleft">⟲</div>
+      <div class="map_ctrl_item" id="map_ctrl_forward">↑</div>
+      <div class="map_ctrl_item" id="map_ctrl_turnright">⟳</div>
+      <div class="map_ctrl_item" id="map_ctrl_moveleft">←</div>
+      <div class="map_ctrl_item" id="map_ctrl_none"></div>
+      <div class="map_ctrl_item" id="map_ctrl_moveright">→</div>
+      <div class="map_ctrl_item" id="map_ctrl_enlarge">+</div>
+      <div class="map_ctrl_item" id="map_ctrl_backward">↓</div>
+      <div class="map_ctrl_item" id="map_ctrl_shrink">-</div>
+    </div>
+    <% end %>
 
-<div id="compass">
-  <div id="uparrow"></div>
-  <div id="downarrow"></div>
-</div>
-</div>
+    <div id="compass">
+      <div id="uparrow"></div>
+      <div id="downarrow"></div>
+    </div>
+    </div>
 
-<br>
-<div class="search_place_input">
-  <input type="text" name="map_auto_complete_input" value="" id="map_auto_complete_input">
-  <div class="little_button" id="map_search_button">-&gt;</div>
-</div>
-<div class="center" id="guidmap">
+    <br>
+    <div class="search_place_input">
+      <input type="text" name="map_auto_complete_input" value="" id="map_auto_complete_input">
+      <div class="little_button" id="map_search_button">-&gt;</div>
+    </div>
+    <div class="center" id="guidmap">
+    </div>
+  </div>
+
+  <div class="chat_list">
+    <div class="chat_input_area">
+      <label for="input_message">Input: </label>
+      <textarea name="input_message" id="chat_input_message"></textarea>
+      <input type="button" name="input_button" value="Send" id="chat_input_send">
+    </div>
+    <div class="chat_item_area" id="chat_item_area">
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">

@@ -1,6 +1,9 @@
-<h1>Travels</h1>
-
-<%= link_to "New Travel", new_travel_path %>
+<div class="travels_head">
+  <h1>Travels</h1>
+  <div class="center_link">
+    <%= link_to "New Travel", new_travel_path %>
+  </div>
+</div>
 
 <% @travels.each do |t| %>
   <div class="travel_item">
