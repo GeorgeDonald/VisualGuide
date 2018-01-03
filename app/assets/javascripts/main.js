@@ -60,5 +60,7 @@ function setToggleMainMenu(){
     }
   });
 
-  document.querySelector("#user_avatar").addEventListener('click',toggleMainMenu);
+  var avt = document.querySelector("#user_avatar");
+  if(avt)
+    avt.addEventListener('click',toggleMainMenu);
 }

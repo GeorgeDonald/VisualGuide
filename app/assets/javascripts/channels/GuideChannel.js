@@ -1,4 +1,8 @@
-function createGuideChannel(guide_id, cb){
+function createGuideChannel(guide_id, guide_cb, msg_cb){
+  if(!guide_id){
+    debugger
+  }
+
   App.guideChannel = App.cable.subscriptions.create(
     { channel: "GuideChannel", id: guide_id},
     {
@@ -24,24 +28,7 @@ function createGuideChannel(guide_id, cb){
     { channel: "ChatChannel", id: guide_id},
     {
       received: (data) => {
-        var ne = newchild("div","chat_item");
-        var h=newchild('div',"chat_item_head","",ne);
-        var m=newchild('div',"chat_item_message","",ne);
-        m.innerText=data.message;
-        var a=newchild('div',"chat_item_avatar","",h);
-        var i=newchild('img',"chat_item_img","",a);
-        i.src=data.avatar_url;
-        var is = newchild('div',"chat_item_info","",h);
-        var n = newchild("div","chat_item_name","",is);
-        n.innerText=data.user_name;
-        var b=newchild("div","chat_item_edit","",is);
-
-        var area = E("chat_item_area");
-        if(area.children.length)
-          area.insertBefore(ne,area.children[0]);
-        else {
-          area.appendChild(ne);
-        }
+        msg_cb(data)
       }
     }
   );

@@ -7,5 +7,5 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   has_one :current_position
   has_many :guides
-  
+  has_many :messages
 end

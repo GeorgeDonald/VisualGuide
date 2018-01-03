@@ -50,12 +50,20 @@
   </div>
 
   <div class="chat_list">
+    <%= form_with model: Message.new, url: "/messages/index", class: 'hidden', id: "hidden_chat_message_form" do |f|%>
+    <%= f.text_area :message %>
+    <% end %>
+
     <div class="chat_input_area">
       <label for="input_message">Input: </label>
       <textarea name="input_message" id="chat_input_message"></textarea>
       <input type="button" name="input_button" value="Send" id="chat_input_send">
     </div>
     <div class="chat_item_area" id="chat_item_area">
+    </div>
+
+    <div class="hidden" id="chat_item_history">
+      <input type="button" name="" value="More" id="chat_item_more">
     </div>
   </div>
 </div>

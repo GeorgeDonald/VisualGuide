@@ -1,17 +1,18 @@
 class GuidesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @guides = Guide.where("user_id=#{current_user.id} and status=1")
+    @guides = Guide.where("user_id=#{current_user.id} and status=1").order(updated_at: :desc)
     if(!@guides.empty?)
       @guide = @guides[0]
       redirect_to "/guides/#{@guide.id}"
       return
     end
 
-    @following = Follower.where("user_id=#{current_user.id}")
+    @following = Follower.where("user_id=#{current_user.id}").order(updated_at: :desc)
     @following.each do |f|
-      @guide = Guide.where("id=#{f.guide_id} and status=1")
-      if(@guide)
+      @guides = Guide.where("id=#{f.guide_id} and status=1")
+      if(!@guides.empty?)
+        @guide = @guides[0]
         redirect_to "/guides/#{@guide.id}"
         return
       else
