@@ -7,8 +7,8 @@ function createGuideChannel(guide_id, guide_cb, msg_cb){
     { channel: "GuideChannel", id: guide_id},
     {
       received: (data) => {
-        if(!E("map_ctrl") && cb )
-          cb(data);
+        if(!E("map_ctrl") && guide_cb )
+          guide_cb(data);
       }
     }
   );
