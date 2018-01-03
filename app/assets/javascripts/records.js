@@ -3,6 +3,8 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 var mediaRecorder;
 var video;
+var StartedRecording;
+var record_id;
 
 function initVideo(video_element){
   // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -49,7 +51,7 @@ function initVideo(video_element){
       var fd = new FormData();
       fd.append(frm.children[0].name, frm.children[0].value)
       fd.append(frm.children[1].name, frm.children[1].value)
-      fd.append('fname', 'test.webm');
+      fd.append('record_id', record_id);
       fd.append('data', e.data);
       fd.append("commit", "Update");
       fd.append("controller", "view_sequences");
@@ -102,7 +104,6 @@ function stopRecord(){
     mediaRecorder.stop();
 }
 
-var StartedRecording;
 function sendViewSequenceData(data){
   if(!StartedRecording)
     return;
@@ -113,6 +114,7 @@ function sendViewSequenceData(data){
   var fd = new FormData();
   fd.append(frm.children[0].name, frm.children[0].value)
   fd.append(frm.children[1].name, frm.children[1].value)
+  fd.append('record_id',record_id)
   fd.append('latitude', data.latitude);
   fd.append('longitude', data.longitude);
   fd.append('heading', data.heading);
@@ -134,7 +136,6 @@ function updateStatus(status){
   var frm = Q1("#hidden_chat_message_form");
   if(!frm)return;
 
-  var record_id;
   var pathname = location.pathname.match(/\/records\/([0-9]+)/);
   if(pathname && pathname.length>1)
     record_id = pathname[1];
