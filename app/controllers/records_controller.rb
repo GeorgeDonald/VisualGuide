@@ -1,3 +1,4 @@
+require 'pry'
 class RecordsController < ApplicationController
   before_action :authenticate_user!
 
@@ -45,18 +46,20 @@ class RecordsController < ApplicationController
   end
 
   def update
+    binding.pry
     @record = Record.find(params[:id])
-    if record_params
-      if(@record.update(record_params))
+    prms = record_params
+    if prms[:name]
+      prms['user_id']=current_user.id;
+      prms['status']=0;
+      if(@record.update(prms))
         redirect_to records_path
       else
         redirect_to edit_record_path, notice: "Error occured."
       end
-    elsif status_params
-      @record.update(record_params)
-      render json: {}
     else
-      redirect_to records_path
+      @record.update(status_params)
+      render :json => {}
     end
   end
 
@@ -70,9 +73,7 @@ class RecordsController < ApplicationController
 
   private
   def record_params
-    params['record']['user_id']=current_user.id;
-    params['record']['status']=0;
-    params.require(:record).permit(:user_id, :name,:description,:latitude,:longitude,:heading,:pitch,:status)
+    params.require(:record).permit(:name,:description,:latitude,:longitude,:heading,:pitch)
   end
   def status_params
     params.require(:record).permit(:status)

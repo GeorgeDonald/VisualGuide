@@ -1,6 +1,14 @@
                   Prefix Verb   URI Pattern                         Controller#Action
                     root GET    /                                   main#index
               main_index GET    /main/index(.:format)               main#index
+                 records GET    /records(.:format)                  records#index
+                         POST   /records(.:format)                  records#create
+              new_record GET    /records/new(.:format)              records#new
+             edit_record GET    /records/:id/edit(.:format)         records#edit
+                  record GET    /records/:id(.:format)              records#show
+                         PATCH  /records/:id(.:format)              records#update
+                         PUT    /records/:id(.:format)              records#update
+                         DELETE /records/:id(.:format)              records#destroy
                   guides GET    /guides(.:format)                   guides#index
                          POST   /guides(.:format)                   guides#create
                new_guide GET    /guides/new(.:format)               guides#new
@@ -33,3 +41,6 @@ cancel_user_registration GET    /users/cancel(.:format)             users/regist
                          DELETE /users(.:format)                    users/registrations#destroy
                          POST   /users(.:format)                    users/registrations#create
 current_positions_update POST   /current_positions/update(.:format) current_positions#update
+                         GET    /guides/:id/stop(.:format)          guides#stop
+          messages_index POST   /messages/index(.:format)           messages#index
+           records_video POST   /records/video(.:format)            records#video

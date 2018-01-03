@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   post '/current_positions/update', to: 'current_positions#update'
   get '/guides/:id/stop', to: 'guides#stop'
   post '/messages/index', to: 'messages#index'
-  post '/records/video', to: 'records#video'
+  post '/view_sequences/video', to: 'view_sequences#video'
+  post '/view_sequences/sequence', to: 'view_sequences#sequence'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

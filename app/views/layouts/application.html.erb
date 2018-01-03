@@ -5,9 +5,9 @@
     <%= csrf_meta_tags %>
 
     <% if user_signed_in? %>
-    <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=#{current_user.google_api_key}" %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=#{current_user.google_api_key}" %>
     <% else %>
-    <%= javascript_include_tag "http://maps.googleapis.com/maps/api/js?v=3&libraries=places" %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3&libraries=places" %>
     <% end %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>

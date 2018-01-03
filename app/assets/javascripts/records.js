@@ -2,6 +2,7 @@
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 var mediaRecorder;
+var video;
 
 function initVideo(video_element){
   // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -51,11 +52,11 @@ function initVideo(video_element){
       fd.append('fname', 'test.webm');
       fd.append('data', e.data);
       fd.append("commit", "Update");
-      fd.append("controller", "video_sequences");
+      fd.append("controller", "view_sequences");
       fd.append("action", "update");
       $.ajax({
           type: 'POST',
-          url: '/records/video',
+          url: '/view_sequences/video',
           data: fd,
           processData: false,
           contentType: false
@@ -72,7 +73,7 @@ function initVideo(video_element){
       console.log("oop, stopped");
     }
     //*
-    var video = document.querySelector(video_element);
+    video = document.querySelector(video_element);
     // Older browsers may not have srcObject
     if ("srcObject" in video) {
       video.srcObject = stream;
@@ -96,18 +97,88 @@ function startRecord(){
     mediaRecorder.start(33);
 }
 
-function sendViewSequenceData(data){
-
+function stopRecord(){
+  if(mediaRecorder)
+    mediaRecorder.stop();
 }
 
-function initRecordingPage(){
+var StartedRecording;
+function sendViewSequenceData(data){
+  if(!StartedRecording)
+    return;
+
+  var frm = Q1("#hidden_chat_message_form");
+  if(!frm)return;
+
+  var fd = new FormData();
+  fd.append(frm.children[0].name, frm.children[0].value)
+  fd.append(frm.children[1].name, frm.children[1].value)
+  fd.append('latitude', data.latitude);
+  fd.append('longitude', data.longitude);
+  fd.append('heading', data.heading);
+  fd.append('pitch', data.pitch);
+  fd.append("commit", "Update");
+  fd.append("controller", "view_sequences");
+  fd.append("action", "update");
+  $.ajax({
+      type: 'POST',
+      url: '/view_sequences/sequence',
+      data: fd,
+      processData: false,
+      contentType: false
+  }).done(function(data) {
+  });
+}
+
+function updateStatus(status){
+  var frm = Q1("#hidden_chat_message_form");
+  if(!frm)return;
+
   var record_id;
   var pathname = location.pathname.match(/\/records\/([0-9]+)/);
   if(pathname && pathname.length>1)
     record_id = pathname[1];
 
+
+  var fd = new FormData();
+  fd.append(frm.children[0].name, frm.children[0].value)
+  fd.append(frm.children[1].name, frm.children[1].value)
+  fd.append('record[status]', status);
+  fd.append("commit", "Update");
+  fd.append("controller", "records");
+  fd.append("_method", "patch");
+  $.ajax({
+      type: 'POST',
+      url: `/records/${record_id}`,
+      data: fd,
+      processData: false,
+      contentType: false
+  }).done(function(data) {
+  });
+}
+
+function onStartStop(e){
+  if(e.target.value=="Start"){
+    StartedRecording = true;
+    startRecord();
+    var data={
+      latitude: Q1("#lat").innerText,
+      longitude: Q1("#lon").innerText,
+      heading: Q1("#heading").innerText,
+      pitch: Q1("#pitch").innerText
+    };
+    sendViewSequenceData(data);
+    e.target.value='Stop';
+    updateStatus(2);
+  } else {
+    stopRecord();
+    StartedRecording = false;
+    updateStatus(3);
+  }
+}
+
+function initRecordingPage(){
   setReloadMap(initStreetViewWithMap,sendViewSequenceData);
   initVideo("#video_view_video");
-  //onclick("stop_guide_show", destroyGuideChannel);
-
+  onclick("start_stop_record_button", onStartStop);
 }
