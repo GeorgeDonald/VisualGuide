@@ -1,0 +1,70 @@
+<div class="guide_show_head">
+  <h1><%= @record.name %></h1>
+  <div class="center_link">
+    <%= form_with model: ViewSequence.new, url: "/view_sequences/index", class: 'hidden', id: "hidden_chat_message_form" do |f|%>
+    <%= f.number_field :latitude %>
+    <% end %>
+    <%= form_with model: @record, class: 'hidden', id: "hidden_record_form" do |f|%>
+    <%= f.number_field :status %>
+    <% end %>
+    <input type="button" name="" value="Start" id='start_stop_record_button'>
+  </div>
+  <div class="video_view_port">
+    <div class="video_view_caption"></div>
+    <div class="video_view_video" id="video_view_video">
+      <% if @record.status==3 && @record.file_name %>
+      <video src="<%=@record.file_name%>" poster="<%=getStreetViewUrl(@g.latitude, @g.longitude, @g.heading, @g.pitch)%>" controls>
+      </video>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="guide_show_viewmap">
+  <div class="map center" id="streetview">
+  <img src="<%= getStreetViewUrl(@record.latitude,@record.longitude,@record.heading,@record.pitch) %>" alt="street view" id='map_image' />
+  <div id="lat_lon">
+    <div class="strike">latitude: <span id="lat"><%=@record.latitude.to_s%></span> </div>
+    <div class="strike">longitude: <span id="lon"><%=@record.longitude.to_s%></span> </div>
+    <div class="strike">heading: <span id="heading"><%= @record.heading%></span> </div>
+    <div class="strike">pitch: <span id="pitch"><%= @record.pitch%></span> </div>
+  </div>
+
+  <% if @record.status == 1 %>
+  <div class="hidden" id="map_ctrl">
+    <div class="map_ctrl_item" id="map_ctrl_turnleft">⟲</div>
+    <div class="map_ctrl_item" id="map_ctrl_forward">↑</div>
+    <div class="map_ctrl_item" id="map_ctrl_turnright">⟳</div>
+    <div class="map_ctrl_item" id="map_ctrl_moveleft">←</div>
+    <div class="map_ctrl_item" id="map_ctrl_none"></div>
+    <div class="map_ctrl_item" id="map_ctrl_moveright">→</div>
+    <div class="map_ctrl_item" id="map_ctrl_enlarge">+</div>
+    <div class="map_ctrl_item" id="map_ctrl_backward">↓</div>
+    <div class="map_ctrl_item" id="map_ctrl_shrink">-</div>
+  </div>
+  <% end %>
+
+  <div id="compass">
+    <div id="uparrow"></div>
+    <div id="downarrow"></div>
+  </div>
+  </div>
+
+  <br>
+  <div class="search_place_input">
+    <input type="text" name="map_auto_complete_input" value="" id="map_auto_complete_input">
+    <div class="little_button" id="map_search_button">-&gt;</div>
+  </div>
+  <div class="center" id="guidmap">
+  </div>
+</div>
+
+<% if @record.status == 1 || @record.status == 2 %>
+<script type="text/javascript">
+  initRecordingPage();
+</script>
+<% else %>
+<script type="text/javascript">
+  initPlayingPage();
+</script>
+<% end %>

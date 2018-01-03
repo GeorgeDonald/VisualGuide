@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  record_id: 1
+  latitude: 1.5
+  longitude: 1.5
+  heading: 1.5
+  pitch: 1.5
+
+two:
+  record_id: 1
+  latitude: 1.5
+  longitude: 1.5
+  heading: 1.5
+  pitch: 1.5

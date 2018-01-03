@@ -1,0 +1,25 @@
+<div class="guide_item">
+  <div class="guide_item_img">
+    <img src="<%=getStreetViewUrl(@g.latitude, @g.longitude, @g.heading, @g.pitch)%>" alt="street view image" class="guide_item_img">
+  </div>
+  <div class="guide_item_body">
+
+    <div class="guide_item_name"><%= @g.name %></div>
+
+    <div class="guide_item_nav">
+      <% if @is_my_guide %>
+      <%= link_to "Edit", edit_record_path(@g) %>-
+      <%= link_to "Delete", record_path(@g), method: :delete %>-
+      <% end %>
+      <% if @g.status == 0 %>
+      <%= link_to "Record", record_path(@g), class: "show_guide_link", id: "show_guide_link_#{@g.id}" %>
+      <% elsif @g.status == 3 %>
+      <%= link_to "Playback", record_path(@g), class: "show_guide_link", id: "show_guide_link_#{@g.id}" %>
+      <% end %>
+    </div>
+
+    <div class="guide_item_description">
+      <%= @g.description %>
+    </div>
+  </div>
+</div>

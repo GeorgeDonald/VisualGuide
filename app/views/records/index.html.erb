@@ -1,0 +1,28 @@
+<div class="guides_list">
+<h1>My planing Records</h1>
+<%= link_to "Create a new Record", new_record_path, id: "new_guide_link" %> <br /><br />
+
+<% @is_my_guide = true %>
+<% @my_schedule_records.each do |g| %>
+  <% @g = g %>
+  <%= render "record_item" %>
+<% end %>
+
+<h1>My Records</h1>
+<% @my_finished_records.each do |g| %>
+  <% @g = g %>
+  <%= render "record_item" %>
+<% end %>
+
+<% @is_my_guide = false %>
+<h1>Playback Records</h1>
+<% @other_records.each do |g| %>
+  <% @g = g %>
+  <%= render "record_item" %>
+<% end %>
+
+</div>
+
+<script type="text/javascript">
+  initIndexGuidePage();
+</script>
