@@ -14,6 +14,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'thin'
 end
 
 group :production do
@@ -64,4 +65,3 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'paperclip'
-gem 'thin'
