@@ -1,4 +1,3 @@
-require 'pry'
 class TravelsController < ApplicationController
   before_action :authenticate_user!
 

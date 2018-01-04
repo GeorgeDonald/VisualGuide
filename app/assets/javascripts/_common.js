@@ -61,6 +61,7 @@ function makeGoogleStreetViewUrl(prms){
 }
 
 function onPlayStreetViewKeyDown(key, defaultPrms){
+  var ll;
   defaultPrms.care = true;
   switch(key){
     case "ArrowLeft":  //left arrow

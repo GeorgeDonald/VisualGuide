@@ -1,8 +1,4 @@
 function createGuideChannel(guide_id, guide_cb, msg_cb){
-  if(!guide_id){
-    debugger
-  }
-
   App.guideChannel = App.cable.subscriptions.create(
     { channel: "GuideChannel", id: guide_id},
     {

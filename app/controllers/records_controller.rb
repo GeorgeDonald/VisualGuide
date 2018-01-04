@@ -1,4 +1,3 @@
-require 'pry'
 class RecordsController < ApplicationController
   before_action :authenticate_user!
 
@@ -46,7 +45,6 @@ class RecordsController < ApplicationController
   end
 
   def update
-    binding.pry
     @record = Record.find(params[:id])
     prms = record_params
     if prms[:name]
