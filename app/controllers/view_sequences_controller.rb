@@ -8,7 +8,7 @@ class ViewSequencesController < ApplicationController
         now = Time.now
         record.file_name = "#{current_user.id}_#{params[:record_id]}_#{now.year}#{now.month}#{now.day}#{now.hour}#{now.min}#{now.sec}.mp4"
         record.save
-      }
+      end
       save_uploaded_file(params[:data],'video',record.file_name)
     end
     render :json => {}
