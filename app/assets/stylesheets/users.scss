@@ -2,7 +2,7 @@
 
 .user_pannel {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: 50% 50%;
   .left_part {
     img{
       width: 90%;
@@ -23,6 +23,9 @@
         }
       }
     }
+  }
+  @media screen and (min-resolution: 150dpi){
+    grid-template-columns: 0 100%;
   }
 }
 
