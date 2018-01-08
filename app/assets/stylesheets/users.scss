@@ -30,7 +30,7 @@
   @include centerBlock(480px, 360px, $pannel_bkgnd, $pannel_fntclr);
 
   @media screen and (min-resolution: 150dpi){
-    @include centerBlock(100vw, 100vh, $pannel_bkgnd, $pannel_fntclr);
+    @include fullBlock($pannel_bkgnd, $pannel_fntclr);
   }
 }
 

@@ -2,6 +2,17 @@ $pannel_bkgnd: rgb(30,160,120);
 $pannel_fntclr: white;
 
 
+@mixin fullBlock($bkclr, $frclr) {
+  position: absolute;
+  left: 0;
+  top: 80px;
+  width: 100vw;
+  height: 100vh;
+  background-color: $bkclr;
+  color: $frclr;
+  font-size: 1.5em;
+}
+
 @mixin centerBlock($width, $height, $bkclr, $frclr) {
   position: absolute;
   left: calc((100% - #{$width}) / 2);
