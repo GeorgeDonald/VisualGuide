@@ -26,17 +26,6 @@
   }
   @media screen and (min-resolution: 150dpi){
     grid-template-columns: 0 100%;
-    .left_part, .right_part {
-      & > * {
-        height: 3em;
-        & > * {
-          height: 3em;
-          & > * {
-            height: 3em;
-          }
-        }
-      }
-    }
   }
 }
 
