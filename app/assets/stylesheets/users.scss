@@ -28,6 +28,10 @@
 
 .user_login {
   @include centerBlock(480px, 360px, $pannel_bkgnd, $pannel_fntclr);
+
+  @media screen and (max-width: 480px){
+    @include centerBlock(100vw, 100vh, $pannel_bkgnd, $pannel_fntclr);
+  }
 }
 
 .user_signup {

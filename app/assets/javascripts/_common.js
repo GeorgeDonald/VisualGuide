@@ -3,8 +3,8 @@ const RoE = 6371e3;
 function E(id){return document.getElementById(id);}
 function Q(cls){return document.querySelectorAll(cls);}
 function Q1(cls){return document.querySelector(cls);}
-function hide(sel){document.querySelectorAll(sel).forEach(e=>e.classList.add('hidden'))}
-function show(sel){document.querySelectorAll(sel).forEach(e=>e.classList.remove('hidden'))}
+function hide(sel){Q(sel).forEach(e=>e.classList.add('hidden'))}
+function show(sel){Q(sel).forEach(e=>e.classList.remove('hidden'))}
 function onclick(id,cb){E(id).addEventListener('click',cb);}
 function newchild(tag,cls,id,father){
   var ne = document.createElement(tag);
