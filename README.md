@@ -4,9 +4,9 @@
 <p>This Web App was written in Ruby on Rails in the back end, and in HTML, JavaScript in front end, and ActionCable in the back and front end. And it uses Google Map StreetView, Directions, Places APIs.</p><br />
 <p>It tries to take you to somewhere you didn't get to, and take a look at it in advance, or take a route to take a look at the scenery of it. </p><br/>
 <h3>Take a look at these pictures: </h3>
-<img src="./public/images/streetview2.jpg" >
-<img src="./public/images/streetview3.jpg" >
-<img src="./public/images/streetview4.jpg" >
+<img src="./public/images/streetview2.jpeg" >
+<img src="./public/images/streetview3.jpeg" >
+<img src="./public/images/streetview4.jpeg" >
 <br/>
 
 <p>Do you know where they are?</p>
