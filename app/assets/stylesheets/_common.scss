@@ -5,6 +5,12 @@ $pannel_fntclr: white;
   @media screen and (min-resolution: 150dpi){
     font-size: 0.8em;
   }
+  @media screen and (min-resolution: 200dpi){
+    font-size: 1.2em;
+  }
+  @media screen and (min-resolution: 250dpi){
+    font-size: 2em;
+  }
 }
 
 @mixin fullBlock($bkclr, $frclr) {
