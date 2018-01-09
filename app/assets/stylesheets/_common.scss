@@ -1,12 +1,6 @@
 $pannel_bkgnd: rgb(30,160,120);
 $pannel_fntclr: white;
 
-* {
-  @media screen and (min-resolution: 150dpi){
-    font-size: 1em;
-  }
-}
-
 @mixin fullBlock($bkclr, $frclr) {
   position: absolute;
   left: 0;
@@ -15,7 +9,7 @@ $pannel_fntclr: white;
   height: 100vh;
   background-color: $bkclr;
   color: $frclr;
-  font-size: 3em;
+  font-size: 0.8em;
 }
 
 @mixin centerBlock($width, $height, $bkclr, $frclr) {

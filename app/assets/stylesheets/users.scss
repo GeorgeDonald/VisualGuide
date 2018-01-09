@@ -32,15 +32,21 @@
 .user_login {
   @include centerBlock(480px, 360px, $pannel_bkgnd, $pannel_fntclr);
 
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 479px){
     @include fullBlock($pannel_bkgnd, $pannel_fntclr);
   }
 }
 
 .user_signup {
   @include centerBlock(520px, 390px, $pannel_bkgnd, $pannel_fntclr);
+  @media screen and (max-width: 519px){
+    @include fullBlock($pannel_bkgnd, $pannel_fntclr);
+  }
 }
 
 .user_update {
   @include centerBlock(640px, 500px, $pannel_bkgnd, $pannel_fntclr);
+  @media screen and (max-width: 639px){
+    @include fullBlock($pannel_bkgnd, $pannel_fntclr);
+  }
 }
