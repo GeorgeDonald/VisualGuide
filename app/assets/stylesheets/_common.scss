@@ -3,13 +3,13 @@ $pannel_fntclr: white;
 
 * {
   @media screen and (min-resolution: 150dpi){
-    font-size: 0.8em;
+    font-size: 32px;
   }
   @media screen and (min-resolution: 200dpi){
-    font-size: 1.2em;
+    font-size: 48px;
   }
   @media screen and (min-resolution: 250dpi){
-    font-size: 2em;
+    font-size: 64px;
   }
 }
 
