@@ -34,32 +34,32 @@
   </div>
 </div>
 
-<div class="map center" id="streetview">
-<img src="" alt="street view" id='map_image' />
-<div id="lat_lon">
-  <div class="strike">latitude: <span id="lat"><%=@travel.start_latitude.to_s%></span> </div>
-  <div class="strike">longitude: <span id="lon"><%=@travel.start_longitude.to_s%></span> </div>
-  <div class="strike">heading: <span id="heading">0</span> </div>
-  <div class="strike">pitch: <span id="pitch">0</span> </div>
-  <div class="hidden">latitude: <span id="end_lat"><%=@travel.end_latitude.to_s%></span> </div>
-  <div class="hidden">longitude: <span id="end_lon"><%=@travel.end_longitude.to_s%></span> </div>
+<div class="map center" id="travel_streetview">
+<img src="" alt="street view" id='travel_map_image' />
+<div id="travel_lat_lon">
+  <div class="strike">latitude: <span id="travel_lat"><%=@travel.start_latitude.to_s%></span> </div>
+  <div class="strike">longitude: <span id="travel_lon"><%=@travel.start_longitude.to_s%></span> </div>
+  <div class="strike">heading: <span id="travel_heading">0</span> </div>
+  <div class="strike">pitch: <span id="travel_pitch">0</span> </div>
+  <div class="hidden">latitude: <span id="travel_end_lat"><%=@travel.end_latitude.to_s%></span> </div>
+  <div class="hidden">longitude: <span id="travel_end_lon"><%=@travel.end_longitude.to_s%></span> </div>
 </div>
 
-<div class="hidden" id="map_ctrl">
-  <div class="map_ctrl_item" id="map_ctrl_turnleft">⟲</div>
-  <div class="map_ctrl_item" id="map_ctrl_forward">↑</div>
-  <div class="map_ctrl_item" id="map_ctrl_turnright">⟳</div>
-  <div class="map_ctrl_item" id="map_ctrl_moveleft">←</div>
-  <div class="map_ctrl_item" id="map_ctrl_none"></div>
-  <div class="map_ctrl_item" id="map_ctrl_moveright">→</div>
-  <div class="map_ctrl_item" id="map_ctrl_enlarge">+</div>
-  <div class="map_ctrl_item" id="map_ctrl_backward">↓</div>
-  <div class="map_ctrl_item" id="map_ctrl_shrink">-</div>
+<div class="hidden" id="travel_map_ctrl">
+  <div class="map_ctrl_item" id="travel_map_ctrl_turnleft">⟲</div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_forward">↑</div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_turnright">⟳</div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_moveleft">←</div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_none"></div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_moveright">→</div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_enlarge">+</div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_backward">↓</div>
+  <div class="map_ctrl_item" id="travel_map_ctrl_shrink">-</div>
 </div>
 
-<div id="compass">
-  <div id="uparrow"></div>
-  <div id="downarrow"></div>
+<div id="travel_compass">
+  <div id="travel_uparrow"></div>
+  <div id="travel_downarrow"></div>
 </div>
 </div>
 
@@ -71,7 +71,7 @@
 </div>
 
 <br>
-<div class="center" id="guidmap">
+<div class="center" id="travel_guidemap">
 </div>
 
 

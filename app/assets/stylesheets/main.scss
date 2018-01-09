@@ -85,13 +85,13 @@ article {
     height: 100%;
   }
 
-  #lat_lon {
+  #lat_lon, #travel_lat_lon {
     position: absolute;
     left: 0;
     top: 0;
   }
 
-  #map_ctrl{
+  #map_ctrl, #travel_map_ctrl {
     position: absolute;
     right: 0;
     top: 0;
@@ -113,7 +113,7 @@ article {
       }
     }
   }
-  #compass{
+  #compass, #travel_compass {
     position: absolute;
     top: 48px;
     right: 0;
@@ -121,7 +121,7 @@ article {
     height: 48px;
     background-color: rgba(160, 160, 160, 0.5);
     border-radius: 100%;
-    #uparrow {
+    #uparrow, #travel_uparrow {
       position: relative;
       left: 18px;
       top: 0;
@@ -131,7 +131,7 @@ article {
     	border-right: 6px solid transparent;
     	border-bottom: 24px solid red;
     }
-    #downarrow {
+    #downarrow, #travel_downarrow {
       position: relative;
       left: 18px;
       top: 0;

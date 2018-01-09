@@ -131,14 +131,14 @@ function initNewTravelPage(){
 }
 
 function initShowTravelPage(){
-  var start_latitude = parseFloat(E("lat").innerText);
-  var start_longitude = parseFloat(E("lon").innerText);
-  var end_latitude = parseFloat(E("end_lat").innerText);
-  var end_longitude = parseFloat(E("end_lon").innerText);
+  var start_latitude = parseFloat(E("travel_lat").innerText);
+  var start_longitude = parseFloat(E("travel_lon").innerText);
+  var end_latitude = parseFloat(E("travel_end_lat").innerText);
+  var end_longitude = parseFloat(E("travel_end_lon").innerText);
   var directionsService = new google.maps.DirectionsService();
   var directionsDisplay = new google.maps.DirectionsRenderer();
   var overview_path = null;
-  var play_timer_id = null;
+  var play_timer_id = undefined;
   var current_path = 0;
   var current_distance = 0;
   var ms_per_meter = 1000;
@@ -150,7 +150,7 @@ function initShowTravelPage(){
   var marker = null;
   var defaultPrms = {latitude, longitude, heading, pitch};
 
-  var map = initGoogleMap('guidmap',start_latitude,start_longitude,
+  var map = initGoogleMap('travel_guidemap',start_latitude,start_longitude,
     null,null,null,null,null);
   if(map){
     map=map.map;
@@ -158,9 +158,9 @@ function initShowTravelPage(){
   }
 
   function updateStreetView(){
-    E('map_image').src=makeGoogleStreetViewUrl({latitude, longitude, heading, pitch});
-    E("compass").style.transform = `rotate(${heading}deg)`
-    E("heading").innerText = heading;
+    E('travel_map_image').src=makeGoogleStreetViewUrl({latitude, longitude, heading, pitch});
+    E("travel_compass").style.transform = `rotate(${heading}deg)`
+    E("travel_heading").innerText = heading;
 
     if(marker!=null)
       marker.setMap(null);
@@ -168,6 +168,12 @@ function initShowTravelPage(){
   }
 
   function step_on(){
+    var svi = $("#travel_streetview");
+    if(!svi.length){
+      on_stop();
+      return;
+    }
+    
     elapse_ms += 10;
     if(elapse_ms >= ms_per_meter){
       elapse_ms -= ms_per_meter;
@@ -192,9 +198,47 @@ function initShowTravelPage(){
         } else {
           hide("#travel_pause");
           clearInterval(play_timer_id);
+          play_timer_id = undefined;
         }
       }
     }
+  }
+
+  function on_stop(){
+    clearInterval(play_timer_id);
+    play_timer_id = undefined;
+
+    current_path = 0;
+    current_distance = 0;
+    latitude = start_latitude;
+    longitude = start_longitude;
+
+    heading = LatLon(overview_path[0].lat(),overview_path[0].lng())
+      .bearingTo(LatLon(overview_path[1].lat(),overview_path[1].lng()));
+    updateStreetView();
+
+    hide("#travel_pause")
+    hide("#travel_stop")
+    show("#travel_play");
+    enableControl(true);
+  }
+
+  function on_play(){
+    hide("#travel_play");
+    show("#travel_pause");
+    show("#travel_stop");
+    enableControl(false);
+    elapse_ms = 0;
+    play_timer_id = setInterval(step_on, 10);
+  }
+
+  function on_pause(){
+    clearInterval(play_timer_id);
+    play_timer_id = undefined;
+
+    hide("#travel_pause")
+    show("#travel_play");
+    enableControl(true);
   }
 
   var request = {
@@ -215,37 +259,9 @@ function initShowTravelPage(){
       current_path = 0;
       current_distance = 0;
 
-      onclick("travel_play", e=>{
-        hide("#travel_play");
-        show("#travel_pause");
-        show("#travel_stop");
-        enableControl(false);
-        elapse_ms = 0;
-        play_timer_id = setInterval(step_on, 10);
-      });
-      onclick("travel_pause", e=>{
-        clearInterval(play_timer_id);
-        hide("#travel_pause")
-        show("#travel_play");
-        enableControl(true);
-      });
-      onclick("travel_stop", e=>{
-        clearInterval(play_timer_id);
-
-        current_path = 0;
-        current_distance = 0;
-        latitude = start_latitude;
-        longitude = start_longitude;
-
-        heading = LatLon(overview_path[0].lat(),overview_path[0].lng())
-          .bearingTo(LatLon(overview_path[1].lat(),overview_path[1].lng()));
-        updateStreetView();
-
-        hide("#travel_pause")
-        hide("#travel_stop")
-        show("#travel_play");
-        enableControl(true);
-      });
+      onclick("travel_play", on_play);
+      onclick("travel_pause", on_pause);
+      onclick("travel_stop", on_stop);
 
       show("#travel_play");
       enableControl(true);
@@ -272,12 +288,12 @@ function initShowTravelPage(){
       defaultPrms.longitude = longitude;
       defaultPrms.heading = heading;
       defaultPrms.pitch = pitch;
-      E("map_ctrl").style.display = 'grid';
+      E("travel_map_ctrl").style.display = 'grid';
       window.addEventListener('keydown', onKeyEvent);
     } else {
-      E("map_ctrl").style.display = "none";
+      E("travel_map_ctrl").style.display = "none";
       pitch = defaultPrms.pitch;
-      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keydown', onKeyEvent);
     }
   }
 
