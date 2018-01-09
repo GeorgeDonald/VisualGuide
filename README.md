@@ -20,7 +20,7 @@
 <p>Click the avatar to show the main menu:</p>
 <img src="./public/images/uishot2.png">
 
-<p>In Travels menu, you can select a start and a end places, then you can play it. It'll make a route for you, and play the StreetView of the route automatically, just like view a movie.</p>
+<p>In Travel menu, you can select a start and a end places, then you can play it. It'll make a route for you, and play the StreetView of the route automatically, just like view a movie.</p>
 
 <h3>Explore it, enjoy it and have fun!</h3>
 </html>
