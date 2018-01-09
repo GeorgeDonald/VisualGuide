@@ -6,7 +6,6 @@ class CurrentPositionsController < ApplicationController
     else
       current_user.current_position.update(cp_params)
     end
-    render :json => {}
   end
 
   private
