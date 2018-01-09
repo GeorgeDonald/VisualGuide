@@ -32,7 +32,7 @@
 .user_login {
   @include centerBlock(480px, 360px, $pannel_bkgnd, $pannel_fntclr);
 
-  @media screen and (max-width: 639px){
+  @media screen and (max-width: 800px){
     @include fullBlock($pannel_bkgnd, $pannel_fntclr);
   }
 }
