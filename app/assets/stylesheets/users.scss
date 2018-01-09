@@ -24,9 +24,6 @@
       }
     }
   }
-  @media screen and (min-resolution: 150dpi){
-    grid-template-columns: 0 100%;
-  }
 }
 
 .user_login {
@@ -34,6 +31,7 @@
 
   @media screen and (max-width: 479px){
     @include fullBlock($pannel_bkgnd, $pannel_fntclr);
+    grid-template-columns: 0 100%;
   }
 }
 
@@ -41,6 +39,7 @@
   @include centerBlock(520px, 390px, $pannel_bkgnd, $pannel_fntclr);
   @media screen and (max-width: 519px){
     @include fullBlock($pannel_bkgnd, $pannel_fntclr);
+    grid-template-columns: 0 100%;
   }
 }
 
@@ -48,5 +47,6 @@
   @include centerBlock(640px, 500px, $pannel_bkgnd, $pannel_fntclr);
   @media screen and (max-width: 639px){
     @include fullBlock($pannel_bkgnd, $pannel_fntclr);
+    grid-template-columns: 0 100%;
   }
 }
