@@ -53,6 +53,10 @@ header {
       padding: 0 0 0 0;
       display: inline-block;
       @include generalButton($btnClrText, $btnClrNormal, $btnClrHover, $btnClrActive, 120px, 30px, 10px);
+      @media screen and (max-width: 820px){
+        display: block;
+        width: 100%;
+      }
     }
   }
 }
