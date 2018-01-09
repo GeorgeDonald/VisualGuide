@@ -10,7 +10,7 @@
 <br/>
 
 <p>Do you know where they are?</p>
-<a href="virtualtravel.herokuapp.com">Try this to find it out.</a><br/>
+<a href="https://virtualtravel.herokuapp.com" target="_blank">Try this to find it out.</a><br/>
 
 <p>You need a Goodle API key. Go <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">here</a> to get one for free, and don't forget going <a href="https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&reusekey=true">here</a> to enable Street View, Directions, and Places APIs. It may take you a few minutes, but it worth it.</p><br/>
 
