@@ -22,5 +22,8 @@
 
 <p>In Travel menu, you can select a start and a end places, then you can play it. It'll make a route for you, and play the StreetView of the route automatically, just like view a movie.</p>
 
+<p>You can also sign in using email abc@test.com and password 123456 to take a look. But you might not see the image if there were too many people using the same account.</p>
+
 <h3>Explore it, enjoy it and have fun!</h3>
+
 </html>
