@@ -15,7 +15,7 @@
 
 </p>When you registered or logged in, you get this:</p>
 <img src="./public/images/uishot1.png">
-<p>Click on the StreetView image, and hit up, down, left, right, &lt;, &gt; arrows to go forward, backward, turn left, right, step left, step right, and hit PageUp and PageDown to pitch up and down.</p>
+<p>Click on the StreetView image, and hit 'up', 'down', 'left', 'right' arrow keys to go forward, backward, turn left, right. And hit '&lt;' or '&gt;' keys to step left or right. And hit 'PageUp' and 'PageDown' to pitch up and down.</p>
 
 <p>Click the avatar to show the main menu:</p>
 <img src="./public/images/uishot2.png">
