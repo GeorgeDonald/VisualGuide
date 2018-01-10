@@ -10,15 +10,19 @@ class ApplicationController < ActionController::Base
   end
 
   def getStreetViewUrl(latitude, longitude, heading = 0, pitch = 0)
-    "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120&location=#{latitude},#{longitude}&heading=#{heading}&pitch=#{pitch}&key=#{current_user.google_api_key}"
+    if user_signed_in? && current_user.google_api_key
+      "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120&location=#{latitude},#{longitude}&heading=#{heading}&pitch=#{pitch}&key=#{current_user.google_api_key}"
+    else
+      "/current_positions/streetview?location=#{latitude},#{longitude}&heading=#{heading}&pitch=#{pitch}"
+    end
   end
 
   def getCurUserPos
-    latitude = 39.95259199321605
-    longitude = -75.16522200000003
-    heading = 0
-    pitch = 0
-    if(current_user.current_position)
+    latitude = 38.89990405669855
+    longitude = -77.0362358156126
+    heading = 180
+    pitch = 32
+    if(user_signed_in? && current_user.current_position)
       latitude = current_user.current_position.latitude
       longitude = current_user.current_position.longitude
       heading = current_user.current_position.heading

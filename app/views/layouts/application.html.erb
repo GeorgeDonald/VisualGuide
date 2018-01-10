@@ -21,6 +21,8 @@
         <% if user_signed_in? %>
         <input type="hidden" name="google_api_key" id="google_api_key" value="<%=current_user.google_api_key%>">
         <%= image_tag current_user.avatar.url(:thumb), id: "user_avatar" %>
+        <% else %>
+        <%= image_tag '/images/profile.png', id: "user_avatar" %>
         <% end %>
       </div>
       <div class="hidden mainmenu" id='mainmenu'>
@@ -28,8 +30,13 @@
         <%= link_to "Travel", travels_path %>
         <%= link_to "Guide", guides_path %>
         <%= link_to "Record", records_path %>
+        <% if user_signed_in? %>
         <%= link_to "Edit Profile", edit_user_registration_path %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+        <% else %>
+        <%= link_to "Sign in", new_user_session_path %>
+        <%= link_to "Sign up", new_user_registration_path %>
+        <% end %>
       </div>
     </header>
 

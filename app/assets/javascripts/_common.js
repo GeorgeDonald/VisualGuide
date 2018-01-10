@@ -52,12 +52,16 @@ function initGoogleMap(
 }
 
 function makeGoogleStreetViewUrl(prms){
-  var url = "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120";
+  var sprm = `location=${prms.latitude},${prms.longitude}&heading=${prms.heading}&pitch=${prms.pitch}`;
   var key = '';
   var eleGak = document.getElementById("google_api_key");
-  if(eleGak && eleGak.value)
+  if(eleGak && eleGak.value) {
+    var url = "https://maps.googleapis.com/maps/api/streetview?size=640x480&fov=120";
     key = `&key=${eleGak.value}`;
-  return `${url}&location=${prms.latitude},${prms.longitude}&heading=${prms.heading}&pitch=${prms.pitch}${key}`;
+    return `${url}&${sprm}${key}`;
+  } else {
+    return `/current_positions/streetview?${sprm}`;
+  }
 }
 
 function onPlayStreetViewKeyDown(key, defaultPrms){
@@ -118,6 +122,18 @@ function onPlayStreetViewKeyDown(key, defaultPrms){
 }
 
 function updateMapInfo(defaultPrms){
+  // var oReq = new XMLHttpRequest();
+  // var uri = `/current_positions/index?latitude=${defaultPrms.latitude}&longitude=${defaultPrms.longitude}&heading=${defaultPrms.heading}&pitch=${defaultPrms.pitch}`;
+  // oReq.open("GET", uri, true);
+  // oReq.responseType = "arraybuffer";
+  // oReq.onload = function (oEvent) {
+  //   if (oReq.response) {
+  //     var blob = new Blob([oReq.response], {type: "image/jpeg"});
+  //     E("map_image").src = URL.createObjectURL(blob);
+  //   }
+  // };
+  // oReq.send(null);
+
   E("map_image").src=makeGoogleStreetViewUrl(defaultPrms);
   E("lat").innerText=`${defaultPrms.latitude}`;
   E("lon").innerText=`${defaultPrms.longitude}`;

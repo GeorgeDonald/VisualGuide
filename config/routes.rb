@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   }
 
   post '/current_positions/update', to: 'current_positions#update'
+  get '/current_positions/streetview', to: 'current_positions#streetview'
   get '/guides/:id/stop', to: 'guides#stop'
   post '/messages/index', to: 'messages#index'
   post '/view_sequences/video', to: 'view_sequences#video'
