@@ -177,9 +177,9 @@ function respMapCtrlItem(onKeyDown){
     {id:"#map_ctrl_turnright", key: "ArrowRight"},
     {id:"#map_ctrl_moveleft", key: ","},
     {id:"#map_ctrl_moveright", key: "."},
-    {id:"#map_ctrl_enlarge", func: ()=>{resizeElement("#streetview","+","40px","+", "30px");}},
+    {id:"#map_ctrl_enlarge", key: "PageUp"},//func: ()=>{resizeElement("#streetview","+","40px","+", "30px");}},
     {id:"#map_ctrl_backward", key: "ArrowDown"},
-    {id:"#map_ctrl_shrink", func: ()=>{resizeElement("#streetview","-","40px","-", "30px");}}
+    {id:"#map_ctrl_shrink", key: "PageDown"}//func: ()=>{resizeElement("#streetview","-","40px","-", "30px");}}
   ];
 
   items.forEach((e)=>{
@@ -292,10 +292,52 @@ function initStreetViewWithMap(onchange){
       e.preventDefault();
   });
 
+  var mouseActionTimer;
+  function setClickOnMap() {
+    $("#map_image").click(function(e){
+      if(mouseActionTimer) {
+        clearInterval(mouseActionTimer);
+        mouseActionTimer = undefined;
+        return;
+      }
+
+      var si = e.target;
+      var w = si.width / 3.0;
+      var h = si.height / 3.0;
+      var x = Math.floor(e.offsetX / w);
+      var y = Math.floor(e.offsetY / h);
+      var hash = {"0x0":'PageUp',"0x1":",","0x2":"ArrowLeft",
+        "1x0":null,"1x1":"ArrowUp","1x2":"ArrowDown",
+        "2x0":'PageDown',"2x1":".","2x2":"ArrowRight"};
+      var key = hash[`${x}x${y}`];
+      if(key){
+        onKeyDown(key);
+        mouseActionTimer = setInterval(function(){
+            onKeyDown(key);
+          }, 100);
+      }
+    });
+
+    $("#map_image").mousemove(function(e){
+      var w = e.target.width / 3.0;
+      var h = e.target.height / 3.0;
+      var x = Math.floor(e.offsetX / w);
+      var y = Math.floor(e.offsetY / h);
+      var hash = {"0x0":'n-resize',"1x0":'default',"2x0":"s-resize",
+        "0x1":'w-resize',"1x1":"zoom-in","2x1":"e-resize",
+        "0x2":'sw-resize',"1x2":"zoom-out","2x2":"se-resize"};
+      var key = hash[`${x}x${y}`];
+      if(key){
+        e.target.style.cursor=key;
+      }
+    });
+  }
+
   respMapCtrlItem(onKeyDown);
   initMap();
   marker = centerMap(defaultPrms, map, marker);
   E("compass").style.transform = `rotate(${defaultPrms.heading}deg)`
+  setClickOnMap();
   //locateMap();
   //getLocation();
 
