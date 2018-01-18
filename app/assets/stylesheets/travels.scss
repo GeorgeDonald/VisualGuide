@@ -43,7 +43,7 @@
 
 .travel_item {
   margin: 8px auto;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   display: grid;
   grid-template-columns: 200px auto 200px;
   @media screen and (max-width: 799px){
