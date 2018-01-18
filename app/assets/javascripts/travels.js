@@ -159,6 +159,10 @@ function initShowTravelPage(){
 
   function updateStreetView(){
     E('travel_map_image').src=makeGoogleStreetViewUrl({latitude, longitude, heading, pitch});
+    E("travel_lat").innerText=`${latitude}`;
+    E("travel_lon").innerText=`${longitude}`;
+    E("travel_heading").innerText=`${heading}`;
+    E("travel_pitch").innerText=`${pitch}`;
     E("travel_compass").style.transform = `rotate(${heading}deg)`
     E("travel_heading").innerText = heading;
 
@@ -173,7 +177,7 @@ function initShowTravelPage(){
       on_stop();
       return;
     }
-    
+
     elapse_ms += 10;
     if(elapse_ms >= ms_per_meter){
       elapse_ms -= ms_per_meter;
