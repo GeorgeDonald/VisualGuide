@@ -38,7 +38,10 @@
 }
 
 .travel_new{
-  @include centerBlock(1024px, 540px, $pannel_bkgnd, $pannel_fntclr)
+  @include centerBlock(1024px, 540px, $pannel_bkgnd, $pannel_fntclr);
+  @media screen and (max-width: 1023px){
+    left: 0;
+  }
 }
 
 .travel_item {
