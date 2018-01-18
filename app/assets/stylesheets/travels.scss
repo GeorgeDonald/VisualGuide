@@ -47,10 +47,7 @@
   display: grid;
   grid-template-columns: 200px auto 200px;
   @media screen and (max-width: 799px){
-    grid-template-columns: 100px auto 100px;
-  }
-  @media screen and (max-width: 399px){
-    grid-template-columns: 50px auto 50px;
+    display: none;
   }
   grid-template-rows: auto auto;
   grid-column-gap: 8px;
