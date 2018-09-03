@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
         result['message'] = message.message
         result['user_name'] = user.full_name
         result['avatar_url'] = user.avatar.url(:thumb)
+        result['message_time'] = message.updated_at
       end
       render :json => result
     else

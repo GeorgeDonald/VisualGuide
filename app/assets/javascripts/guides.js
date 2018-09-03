@@ -11,8 +11,37 @@ function initNewGuidePage(){
     });
 }
 
+function formatDate(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+  return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+}
+
 function onReceivedMessage(data, append){
   var ne = newchild("div","chat_item");
+
+  var left = newchild("div","chat_item_left","",ne);
+  var right = newchild("div","chat_item_right","",ne);
+
+  var img = newchild('img',"chat_item_img","",left);
+  img.src = data.avatar_url;
+
+  var head = newchild('div','chat_item_head','',right);
+  var name = newchild('div','chat_item_name','',head);
+  var mtime = newchild('div','chat_item_time','',head);
+  name.innerText = data.user_name;
+  mtime.innerText = formatDate(new Date(data.message_time));
+
+  var message = newchild('div','chat_item_message','',right);
+  message.innerText = data.message;
+
+  /*
   var h=newchild('div',"chat_item_head","",ne);
   var m=newchild('div',"chat_item_message","",ne);
   m.innerText=data.message;
@@ -23,10 +52,21 @@ function onReceivedMessage(data, append){
   var n = newchild("div","chat_item_name","",is);
   n.innerText=data.user_name;
   var b=newchild("div","chat_item_edit","",is);
+  */
 
   var area = E("chat_item_area");
   if(append){
-    area.appendChild(ne);
+    //area.appendChild(ne);
+    var inserted = false;
+    for( var i = 0; i < area.children.length; i++){
+      if(mtime.innerText > area.children[i].children[1].children[0].children[1].innerText){
+        inserted = true;
+        area.insertBefore(ne,area.children[i]);
+        break;
+      }
+    }
+    if(!inserted)
+      area.appendChild(ne);
   } else {
     if(area.children.length)
       area.insertBefore(ne,area.children[0]);

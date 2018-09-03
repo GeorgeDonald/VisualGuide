@@ -109,26 +109,20 @@
 
 .chat_item {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 48px auto;
 
-  .chat_item_head {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    .chat_item_avatar {
-      .chat_item_img {
-        width: 100%;
-        height: auto;
-        background-size: 100% 100%;
-      }
-    }
-
-    .chat_item_info{
-      .chat_item_name{}
-      .chat_item_edit{}
+  .chat_item_left {
+    .chat_item_img {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
     }
   }
 
-  .chat_item_message {
-
+  .chat_item_right {
+    .chat_item_head {
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
   }
 }
