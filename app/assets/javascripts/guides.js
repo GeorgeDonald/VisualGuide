@@ -11,6 +11,10 @@ function initNewGuidePage(){
     });
 }
 
+function widthFormat(number) {
+  return ('00'+number).substr(-2);
+}
+
 function formatDate(date) {
   var hours = date.getHours();
   var minutes = date.getMinutes();
@@ -19,8 +23,8 @@ function formatDate(date) {
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
   minutes = minutes < 10 ? '0'+minutes : minutes;
-  var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-  return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+  var strTime = widthFormat(hours) + ':' + widthFormat(minutes) + ':' + widthFormat(seconds) + ' ' + ampm;
+  return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
 }
 
 function onReceivedMessage(data, append){
@@ -59,7 +63,7 @@ function onReceivedMessage(data, append){
     //area.appendChild(ne);
     var inserted = false;
     for( var i = 0; i < area.children.length; i++){
-      if(mtime.innerText > area.children[i].children[1].children[0].children[1].innerText){
+      if(mtime.innerText >= area.children[i].children[1].children[0].children[1].innerText){
         inserted = true;
         area.insertBefore(ne,area.children[i]);
         break;
