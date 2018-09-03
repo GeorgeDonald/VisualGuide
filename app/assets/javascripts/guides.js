@@ -151,11 +151,22 @@ function initShowGuidePage(){
   setReloadMap(initStreetViewWithMap,sendGuideData);
   onclick("stop_guide_show", destroyGuideChannel);
   requestUpdateStatus();
-  onclick("chat_input_send", e=>{
+
+  function onClickSend() {
     var msg = E("chat_input_message");
     if(msg.value.length)
       sendChatMessage(msg.value);
-  });
+    msg.setSelectionRange(0,msg.value.length);
+  }
+
+  onclick("chat_input_send", onClickSend);
+  $("#chat_input_message").keydown(event=>{
+      if(event.keyCode===13) {
+        onClickSend();
+        event.preventDefault();
+      }
+    }
+  );
 
   if(guide_id)
     queryHistoryMessages(guide_id);
