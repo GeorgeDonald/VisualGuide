@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_one :current_position
   has_many :guides
   has_many :messages
+  has_many :travels
 end
