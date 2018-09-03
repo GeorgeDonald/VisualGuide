@@ -3,10 +3,8 @@ class GuidesController < ApplicationController
   def index
     @guides = Guide.where("user_id=#{current_user.id} and status=1").order(updated_at: :desc)
     if(!@guides.empty?)
-      #@guide = @guides[0]
-      #redirect_to "/guides/#{@guide.id}"
-      params[:id]=@guides[0].id
-      stop
+      @guide = @guides[0]
+      redirect_to "/guides/#{@guide.id}"
       return
     end
 
@@ -14,10 +12,8 @@ class GuidesController < ApplicationController
     @following.each do |f|
       @guides = Guide.where("id=#{f.guide_id} and status=1")
       if(!@guides.empty?)
-        #@guide = @guides[0]
-        #redirect_to "/guides/#{@guide.id}"
-        params[:id]=@guides[0].id
-        stop
+        @guide = @guides[0]
+        redirect_to "/guides/#{@guide.id}"
         return
       else
         f.destroy
